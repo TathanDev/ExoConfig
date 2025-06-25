@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "exoconfig",
+  "version": "${version}",
+  "name": "ExoConfig",
+  "description": "A Simple config lib based on auto screen config",
+  "authors": [
+    "TATHAN"
+  ],
+  "contact": {
+    "homepage": ""
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/exoconfig/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.tathan.exoconfig.fabric.ExoconfigFabric"
+    ],
+    "client": [
+      "fr.tathan.exoconfig.fabric.client.ExoconfigFabricClient"
+    ]
+  },
+  "mixins": [
+    "exoconfig.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

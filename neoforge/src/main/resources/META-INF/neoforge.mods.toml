@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+#issueTrackerURL = ""
+license = "GNU LGPL 3.0"
+
+[[mods]]
+modId = "exoconfig"
+version = "${version}"
+displayName = "ExoConfig"
+authors = "TATHAN"
+description = '''
+A Simple config lib based on auto screen config
+'''
+#logoFile = ""
+
+[[dependencies.exoconfig]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.exoconfig]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+
+[[mixins]]
+config = "exoconfig.mixins.json"
