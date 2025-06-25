@@ -1,4 +1,6 @@
-package fr.tathan.exoconfig.utils;
+package fr.tathan.exoconfig.common.utils;
+
+import fr.tathan.exoconfig.common.infos.ConfigInfos;
 
 public class ConfigHolder<T> {
 
@@ -16,7 +18,7 @@ public class ConfigHolder<T> {
         return config;
     }
 
-    public ConfigInfos getName() {
+    public ConfigInfos getInfos() {
         return infos;
     }
 
@@ -26,5 +28,10 @@ public class ConfigHolder<T> {
 
     public void setConfig(Object config) {
         this.config = (T) config;
+        this.configInstance = (T) config;
+    }
+
+    public boolean isSyncable() {
+        return infos.side().sync;
     }
 }

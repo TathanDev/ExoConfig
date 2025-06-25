@@ -1,4 +1,6 @@
-package fr.tathan.exoconfig.common.utils;
+package fr.tathan.exoconfig.common.infos;
+
+import fr.tathan.exoconfig.common.utils.Side;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,12 +18,4 @@ public @interface ConfigInfos {
         String value();
     }
 
-    class ScreenInfo {
-
-        @Retention(RetentionPolicy.RUNTIME)
-        public @interface InnerConfig {
-        }
-
-
-    }
 }

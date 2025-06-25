@@ -1,31 +1,34 @@
 package fr.tathan.exoconfig.client.components;
 
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.network.chat.Component;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
-public class CustomComponentRegistry {
+public class ConfigWidgetRegistry {
 
-    private final Map<Class, AbstractWidget> components = new HashMap<>();
+    private final Map<Class, Function<WidgetFactory, AbstractWidget>> components = new HashMap<>();
 
-    private static final CustomComponentRegistry INSTANCE = new CustomComponentRegistry();
+    private static final ConfigWidgetRegistry INSTANCE = new ConfigWidgetRegistry();
 
-    public static CustomComponentRegistry getInstance() {
+    public static ConfigWidgetRegistry getInstance() {
         return INSTANCE;
     }
 
-    private CustomComponentRegistry() {}
+    private ConfigWidgetRegistry() {}
 
 
-    public void registerComponent(Class<?> componentClass, AbstractWidget component) {
+    public void registerComponent(Class<?> componentClass, Function<WidgetFactory, AbstractWidget> component) {
         if (components.containsKey(componentClass)) {
             throw new IllegalArgumentException("Component already registered for class: " + componentClass.getName());
         }
         registerComponent(componentClass, component, false);
     }
 
-    public void registerComponent(Class<?> componentClass, AbstractWidget component, boolean replace) {
+    public void registerComponent(Class<?> componentClass, Function<WidgetFactory, AbstractWidget> component, boolean replace) {
         if (replace && components.containsKey(componentClass)) {
             components.replace(componentClass, component);
         } else {
@@ -37,6 +40,13 @@ public class CustomComponentRegistry {
         return this.components.containsKey(entryClass);
     }
 
+    public Function<WidgetFactory, AbstractWidget> getComponentForClass(Class<?> entryClass) {
+        return this.components.get(entryClass);
+    }
+
+    public record WidgetFactory(String fieldName, Object configInstance, Object defaultValue, Field field, Component description) {
+
+    }
 
 
 }

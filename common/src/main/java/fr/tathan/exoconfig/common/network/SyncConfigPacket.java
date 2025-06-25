@@ -1,10 +1,10 @@
-package fr.tathan.exoconfig.network;
+package fr.tathan.exoconfig.common.network;
 
 import commonnetwork.networking.data.PacketContext;
 import commonnetwork.networking.data.Side;
 import fr.tathan.exoconfig.ExoConfig;
-import fr.tathan.exoconfig.loader.ConfigsRegistry;
-import fr.tathan.exoconfig.utils.ConfigHolder;
+import fr.tathan.exoconfig.common.loader.ConfigsRegistry;
+import fr.tathan.exoconfig.common.utils.ConfigHolder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -18,10 +18,11 @@ public class SyncConfigPacket {
     public final String stringConfig;
     public final String configName;
 
-    public SyncConfigPacket(String stringConfig, String configName)
+    public SyncConfigPacket(String configName, String stringConfig)
     {
-        this.stringConfig = stringConfig;
         this.configName = configName;
+        this.stringConfig = stringConfig;
+
     }
 
     public static CustomPacketPayload.Type<CustomPacketPayload> type()
@@ -31,13 +32,14 @@ public class SyncConfigPacket {
 
     public SyncConfigPacket(FriendlyByteBuf buf)
     {
-        this.stringConfig = buf.readUtf();
         this.configName = buf.readUtf();
+        this.stringConfig = buf.readUtf();
+
     }
 
     public void encode(FriendlyByteBuf buf) {
-        buf.writeUtf(this.stringConfig);
         buf.writeUtf(this.configName);
+        buf.writeUtf(this.stringConfig);
     }
 
     public static void handle(PacketContext<SyncConfigPacket> ctx) {
@@ -51,9 +53,6 @@ public class SyncConfigPacket {
                 oldHolder.setConfig(newConfig);
                 // Save the updated config
                 ConfigsRegistry.getInstance().registerConfig(newConfig, oldHolder.getConfigInstance());
-                ExoConfig.LOG.info("Received and applied config update for: " + packet.configName);
-            } else {
-                ExoConfig.LOG.warn("Received config update for unknown config: " + packet.configName);
             }
 
 

@@ -1,8 +1,8 @@
-package fr.tathan.exoconfig.loader;
+package fr.tathan.exoconfig.common.loader;
 
-import fr.tathan.exoconfig.utils.ConfigHolder;
-import fr.tathan.exoconfig.utils.ConfigInfos;
-import fr.tathan.exoconfig.utils.Utils;
+import fr.tathan.exoconfig.common.utils.ConfigHolder;
+import fr.tathan.exoconfig.common.infos.ConfigInfos;
+import fr.tathan.exoconfig.common.utils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +25,20 @@ public class ConfigsRegistry {
         if (configInfos == null) {
             throw new IllegalArgumentException("Config class must be annotated with @ConfigInfos");
         }
-        configs.put(configInfos.name(), new ConfigHolder<T>(config, configInfos, configInstance));
+        if (configs.containsKey(configInfos.name())) {
+            configs.replace(configInfos.name(), new ConfigHolder<T>(config, configInfos, configInstance));
+        } else {
+            configs.put(configInfos.name(), new ConfigHolder<T>(config, configInfos, configInstance));
+        }
         return ConfigLoader.loadOrGenerateDefaults(config);
     }
 
 
     public ConfigHolder<?> getConfig(String name) {
          return configs.get(name);
+    }
+
+    public Map<String, ConfigHolder> getConfigs() {
+        return configs;
     }
 }

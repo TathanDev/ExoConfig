@@ -1,4 +1,4 @@
-package com.st0x0ef.stellaris.client.screens.components;
+package fr.tathan.exoconfig.client.components;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -11,6 +11,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
+import java.util.function.Consumer;
+
 public class StateButton extends AbstractButton {
     private static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.withDefaultNamespace("widget/button"), ResourceLocation.withDefaultNamespace("widget/button_disabled"), ResourceLocation.withDefaultNamespace("widget/button_highlighted"));
 
@@ -21,11 +23,17 @@ public class StateButton extends AbstractButton {
             Component.literal("False"),
             Component.translatable("True")
     };
+    public Consumer<Boolean> onPress;
+
+    public StateButton(int x, int y, int width, int height, Component message, boolean defaultState, Consumer<Boolean> onPress) {
+        super(x, y, width, height, message);
+        this.state = defaultState;
+        this.onPress = onPress;
+
+    }
 
     public StateButton(int x, int y, int width, int height, Component message, boolean defaultState) {
-        super(x, y, width, height, message);
-
-        this.state = defaultState;
+        this(x, y, width, height, message, defaultState, (b) -> {});
     }
 
 
@@ -54,6 +62,7 @@ public class StateButton extends AbstractButton {
     @Override
     public void onPress() {
         this.switchState();
+        onPress.accept(this.state);
     }
 
     @Override

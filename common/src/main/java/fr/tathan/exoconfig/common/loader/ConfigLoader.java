@@ -1,9 +1,9 @@
-package fr.tathan.exoconfig.loader;
+package fr.tathan.exoconfig.common.loader;
 
 import fr.tathan.exoconfig.ExoConfig;
-import fr.tathan.exoconfig.utils.ConfigInfos;
+import fr.tathan.exoconfig.common.infos.ConfigInfos;
 import fr.tathan.exoconfig.platform.PlatformHelper;
-import fr.tathan.exoconfig.utils.Utils;
+import fr.tathan.exoconfig.common.utils.Utils;
 
 import java.io.BufferedReader;
 import java.io.File;

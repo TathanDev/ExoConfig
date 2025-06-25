@@ -1,4 +1,4 @@
-package fr.tathan.exoconfig.common.test;
+package fr.tathan.exoconfig.common;
 
 import fr.tathan.exoconfig.common.infos.ConfigInfos;
 import fr.tathan.exoconfig.common.infos.ScreenInfos;

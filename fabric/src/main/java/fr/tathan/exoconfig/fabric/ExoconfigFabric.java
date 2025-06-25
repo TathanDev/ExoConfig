@@ -1,16 +1,14 @@
 package fr.tathan.exoconfig.fabric;
 
-import fr.tathan.exoconfig.Exoconfig;
+import fr.tathan.exoconfig.ExoConfig;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 
 public final class ExoconfigFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        // This code runs as soon as Minecraft is in a mod-load-ready state.
-        // However, some things (like resources) may still be uninitialized.
-        // Proceed with mild caution.
+        ExoConfig.init();
+        ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register(ExoConfig::syncConfigs);
 
-        // Run our common setup.
-        Exoconfig.init();
     }
 }

@@ -1,4 +1,4 @@
-package fr.tathan.exoconfig.common.platform;
+package fr.tathan.exoconfig.platform;
 
 
 import dev.architectury.injectables.annotations.ExpectPlatform;

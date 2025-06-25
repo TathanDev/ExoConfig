@@ -1,12 +1,23 @@
 package fr.tathan.exoconfig.neoforge;
 
-import fr.tathan.exoconfig.Exoconfig;
+import fr.tathan.exoconfig.ExoConfig;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 
-@Mod(Exoconfig.MOD_ID)
+@Mod(ExoConfig.MOD_ID)
 public final class ExoconfigNeoForge {
     public ExoconfigNeoForge() {
         // Run our common setup.
-        Exoconfig.init();
+        ExoConfig.init();
+        NeoForge.EVENT_BUS.addListener(ExoconfigNeoForge::syncConfigs);
+
     }
+
+    public static void syncConfigs(OnDatapackSyncEvent event) {
+        if (event.getPlayer() != null) {
+            ExoConfig.syncConfigs(event.getPlayer(), true);
+        }
+    }
+
 }

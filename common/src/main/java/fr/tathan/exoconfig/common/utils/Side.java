@@ -1,4 +1,4 @@
-package fr.tathan.exoconfig.utils;
+package fr.tathan.exoconfig.common.utils;
 
 public enum Side {
     CLIENT(false, "client"),
