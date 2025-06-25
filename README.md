@@ -1,6 +1,6 @@
 # ExoConfig
 
-ExoConfig, a JSON based config system for modern minecraft version with a lot of cool features !
+ExoConfig, a JSON-based config system for a modern minecraft version with a lot of cool features!
 
 ## Features 🧩
 - Simple and Powerful (trust me)
@@ -9,5 +9,5 @@ ExoConfig, a JSON based config system for modern minecraft version with a lot of
 - Auto Screen support
 
 ## Wiki 📕
-Check our wiki to see how to use the mods : https://github.com/TathanDev/ExoConfig/wiki
+Check our wiki to see how to use the mod: https://github.com/TathanDev/ExoConfig/wiki
 

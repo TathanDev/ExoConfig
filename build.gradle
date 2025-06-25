@@ -2,6 +2,8 @@ plugins {
     id 'dev.architectury.loom' version '1.10-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
+
 }
 
 architectury {
@@ -17,12 +19,14 @@ subprojects {
     apply plugin: 'dev.architectury.loom'
     apply plugin: 'architectury-plugin'
     apply plugin: 'maven-publish'
+    apply plugin: 'me.modmuss50.mod-publish-plugin'
 
     def modLoader = project.name
+    boolean isCommon = modLoader == "common"
 
     base {
-        // Set up a suffixed format for the mod jar names, e.g. `example-fabric`.
-        archivesName = "$rootProject.archives_name-$project.name"
+        archivesName = "${rootProject.archives_name}-${rootProject.minecraft_version}-${project.name}"
+
     }
 
     repositories {
@@ -42,7 +46,7 @@ subprojects {
 
         modImplementation "mysticdrew:common-networking-$modLoader:1.0.18-1.21.1"
 
-        if(!modLoader.equals("common")) {
+        if(!isCommon) {
             // Add the common project as a dependency for all platforms except common and loom.
             include "mysticdrew:common-networking-$modLoader:1.0.18-1.21.1"
         }
@@ -79,6 +83,33 @@ subprojects {
             // Notice: This block does NOT have the same function as the block in the top level.
             // The repositories here will be used for publishing your artifact, not for
             // retrieving dependencies.
+        }
+    }
+
+    if (!isCommon) {
+        publishMods {
+            file = file("../${modLoader.capitalize()}/build/libs/ExoConfig-${minecraft_version}-${modLoader}-${mod_version}.jar")
+            changelog = file("../changelog.md").getText('UTF-8')
+            type = STABLE
+            modLoaders.add(modLoader)
+            displayName = "[${modLoader.capitalize()} ${minecraft_version}] ExoConfig ${mod_version}"
+
+            curseforge {
+                projectId = "0000000" // Required for curseforge
+                projectSlug = "exoconfig" // Required for discord webhook
+                accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+                minecraftVersions.add("${minecraft_version}")
+                javaVersions.add(JavaVersion.VERSION_21)
+                embeds("common-network")
+            }
+
+            modrinth {
+                projectId = "QsXGZyhd"
+                accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+                minecraftVersions.add("${minecraft_version}")
+                embeds("common-network")
+
+            }
         }
     }
 }

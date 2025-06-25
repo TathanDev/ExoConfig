@@ -9,7 +9,15 @@ public class Config {
     @ScreenInfos.NoDescription
     public String name = "TestConfig";
 
-    @ConfigInfos.FileDescription("This is a test config file for ExoConfig.")
-    public boolean enabled = true;
+    @ScreenInfos.Hidden
+    public boolean secretEntry = true;
 
+    @ScreenInfos.InnerConfig
+    public InnerConfig innerConfig = new InnerConfig();
+
+    public static class InnerConfig {
+
+        public String innerValue = "Inner Value";
+        public int innerNumber = 42;
+    }
 }

@@ -37,7 +37,6 @@ public class ExodusClient {
 
         for(Class<?> clazz : editBoxClass) ConfigWidgetRegistry.getInstance().registerComponent(clazz, ScreenUtils::numberAndStringWidget);
 
-
     }
 
 }

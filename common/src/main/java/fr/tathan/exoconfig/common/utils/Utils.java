@@ -1,12 +1,6 @@
 package fr.tathan.exoconfig.common.utils;
 
-import fr.tathan.exoconfig.client.ScreenUtils;
-import fr.tathan.exoconfig.client.components.ConfigWidgetRegistry;
 import fr.tathan.exoconfig.common.infos.ConfigInfos;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.network.chat.Component;
 
 public class Utils {
 
