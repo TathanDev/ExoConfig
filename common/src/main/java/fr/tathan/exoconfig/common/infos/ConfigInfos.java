@@ -14,8 +14,18 @@ public @interface ConfigInfos {
 
 
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface FileDescription {
+    @interface FileDescription {
         String value();
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface PossibleStringValues {
+         String[] values();
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface PossibleIntValues {
+        int[] values();
     }
 
 }

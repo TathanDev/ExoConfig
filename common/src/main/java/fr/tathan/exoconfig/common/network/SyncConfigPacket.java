@@ -48,7 +48,7 @@ public class SyncConfigPacket {
             ConfigHolder<?> oldHolder = ConfigsRegistry.getInstance().getConfig(packet.configName);
             if (oldHolder != null) {
                 // Deserialize the config from the string
-                Object newConfig = ExoConfig.GSON.fromJson(packet.stringConfig, oldHolder.getConfig().getClass());
+                Object newConfig = ExoConfig.getGson().fromJson(packet.stringConfig, oldHolder.getConfig().getClass());
                 // Update the config instance
                 oldHolder.setConfig(newConfig);
                 // Save the updated config

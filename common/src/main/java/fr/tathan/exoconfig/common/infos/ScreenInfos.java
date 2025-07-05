@@ -14,6 +14,8 @@ public class ScreenInfos {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface NoDescription {
+    public @interface Description {
+        String value();
+        boolean translate() default true;
     }
 }

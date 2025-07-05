@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 public class ScreenUtils {
 
     public static boolean showTooltip(Field field) {
-        return !field.isAnnotationPresent(ScreenInfos.NoDescription.class); // This can be modified to return false if you want to disable tooltips
+        return field.isAnnotationPresent(ScreenInfos.Description.class); // This can be modified to return false if you want to disable tooltips
     }
 
     public static EditBox numberAndStringWidget(ConfigWidgetRegistry.WidgetFactory factory) {

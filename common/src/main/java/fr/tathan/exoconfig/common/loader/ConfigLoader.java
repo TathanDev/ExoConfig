@@ -30,10 +30,10 @@ public class ConfigLoader {
 
             try {
                 BufferedReader reader = Files.newBufferedReader(systemsFile);
-                T newConfig = ExoConfig.GSON.fromJson(reader, configClass);
+                T newConfig = ExoConfig.getGson().fromJson(reader, configClass);
 
                 Writer writer = new FileWriter(systemsFile.toFile());
-                ExoConfig.GSON.toJson(newConfig, writer);
+                ExoConfig.getGson().toJson(newConfig, writer);
                 writer.close();
 
                 return newConfig;
@@ -49,7 +49,7 @@ public class ConfigLoader {
                         folder.mkdirs();
 
                     Writer writer = new FileWriter(systemsFile.toFile());
-                    ExoConfig.GSON.toJson(config, writer);
+                    ExoConfig.getGson().toJson(config, writer);
                     writer.close();
 
                 } catch (Exception e1) {

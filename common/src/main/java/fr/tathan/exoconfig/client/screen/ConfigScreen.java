@@ -15,9 +15,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
+import net.minecraft.client.gui.layouts.SpacerElement;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.io.Writer;
@@ -78,17 +80,44 @@ public class ConfigScreen <T> extends Screen {
                 String name = field.getName();
 
                 if (field.isAnnotationPresent(ScreenInfos.InnerConfig.class)) {
-                    configList.addBig(new StringWidget(Component.translatable("config.stellaris." + name).withStyle(ChatFormatting.BOLD), this.font));
+
+                    configList.addBig(getTitleWidget(field, true));
 
                     addFields(field.getType().getFields(), field.get(object),  configList, recursionDepth + 1);
+
                     continue;
                 }
 
-                configList.addSmall(new StringWidget(Component.translatable("config.stellaris." + name), this.font), addTypeWidget(field, object, value, Component.translatable("config.stellaris." + name + ".desc")));
+                configList.addSmall(getTitleWidget(field, false), addTypeWidget(field, object, value, getWidgetDescription(field)));
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public StringWidget getTitleWidget(Field field, boolean title) {
+        String name = field.getName();
+
+        MutableComponent titleComponent = Component.translatable("config.stellaris." + name);
+
+        if(title) titleComponent.withStyle(ChatFormatting.BOLD);
+
+        StringWidget stringWidget = new StringWidget(titleComponent, this.font);
+        stringWidget.setTooltip(Tooltip.create(getWidgetDescription(field)));
+
+        return stringWidget;
+    }
+
+    public Component getWidgetDescription(Field field) {
+        if (field.isAnnotationPresent(ScreenInfos.Description.class)) {
+            ScreenInfos.Description descriptionAnnotation = field.getAnnotation(ScreenInfos.Description.class);
+            if (descriptionAnnotation.translate()) {
+                return Component.translatable(descriptionAnnotation.value());
+            }
+            return Component.literal(descriptionAnnotation.value());
+        } else {
+            return Component.empty();
         }
     }
 
@@ -144,17 +173,17 @@ public class ConfigScreen <T> extends Screen {
         Path configPath = PlatformHelper.getConfigPath().resolve(getConfigName() + ".json");
 
         try (Writer writer = Files.newBufferedWriter(configPath)) {
-            ExoConfig.GSON.toJson(this.configInstance, this.configInstance.getClass(), writer);
+            ExoConfig.getGson().toJson(this.configInstance, this.configInstance.getClass(), writer);
         } catch (Exception e) {
             e.printStackTrace();
             playToast(Component.literal("Config Error"), Component.literal("Failed to save Stellaris config"));
         }
     }
 
-    private SpriteIconButton stellarisConfigButton(int i) {
+    private SpriteIconButton stellarisConfigButton(int width) {
         return SpriteIconButton.builder(Component.literal("Config"), (button) -> {
             Util.getPlatform().openUri(PlatformHelper.getConfigPath().toUri());
-        }, true).width(i).sprite(TEXTURE, 16, 16).build();
+        }, true).width(width).sprite(TEXTURE, 16, 16).build();
     }
 
     public String getConfigName() {

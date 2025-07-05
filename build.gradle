@@ -72,17 +72,25 @@ subprojects {
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                artifactId = base.archivesName.get()
+                groupId "fr.tathan.exoconfig"
+                artifactId "exoconfig-$modLoader-" + minecraft_version
+                version mod_version
                 from components.java
+                pom {
+                    name = "ExoConfig" + modLoader.capitalize()
+                    url = "https://github.com/TathanDev/ExoConfig"
+                }
             }
         }
 
-        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
         repositories {
-            // Add repositories to publish to here.
-            // Notice: This block does NOT have the same function as the block in the top level.
-            // The repositories here will be used for publishing your artifact, not for
-            // retrieving dependencies.
+            maven {
+                url = "https://maven.exodusstudio.org/releases/"
+                credentials {
+                    username = System.getenv("EXODUS_MAVEN_USERNAME") // DO NOT CHANGE
+                    password = System.getenv("EXODUS_MAVEN_KEY") // DO NOT CHANGE
+                }
+            }
         }
     }
 

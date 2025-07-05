@@ -2,6 +2,7 @@ package fr.tathan.exoconfig.common.loader;
 
 import fr.tathan.exoconfig.common.utils.ConfigHolder;
 import fr.tathan.exoconfig.common.infos.ConfigInfos;
+import fr.tathan.exoconfig.common.utils.PostValidation;
 import fr.tathan.exoconfig.common.utils.Utils;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class ConfigsRegistry {
         return INSTANCE;
     }
 
-    private final Map<String, ConfigHolder> configs = new HashMap<>();
+    private final Map<String, ConfigHolder<?>> configs = new HashMap<>();
 
     private ConfigsRegistry() {}
 
@@ -30,7 +31,9 @@ public class ConfigsRegistry {
         } else {
             configs.put(configInfos.name(), new ConfigHolder<T>(config, configInfos, configInstance));
         }
-        return ConfigLoader.loadOrGenerateDefaults(config);
+        T loadedConfig = ConfigLoader.loadOrGenerateDefaults(config);
+        PostValidation.postValidate(loadedConfig);
+        return loadedConfig;
     }
 
 
@@ -38,7 +41,7 @@ public class ConfigsRegistry {
          return configs.get(name);
     }
 
-    public Map<String, ConfigHolder> getConfigs() {
+    public Map<String, ConfigHolder<?>> getConfigs() {
         return configs;
     }
 }
