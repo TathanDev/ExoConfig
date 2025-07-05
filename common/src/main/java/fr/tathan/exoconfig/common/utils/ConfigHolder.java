@@ -26,6 +26,7 @@ public class ConfigHolder<T> {
         return configInstance;
     }
 
+    @SuppressWarnings("unchecked")
     public void setConfig(Object config) {
         this.config = (T) config;
         this.configInstance = (T) config;

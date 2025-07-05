@@ -1,11 +1,11 @@
-package fr.tathan.exoconfig.common.utils;
+package fr.tathan.exoconfig.common.post_validation;
 
 import fr.tathan.exoconfig.common.infos.ConfigInfos;
 import fr.tathan.exoconfig.common.types.ConfigType;
 
 import java.lang.reflect.Field;
 
-public class PostValidation {
+public class PostValidationUtils {
 
     /**
      * This method is called after the configuration has been loaded and validated.
@@ -15,7 +15,11 @@ public class PostValidation {
     public static <T> void postValidate(T configInstance)  {
         Class<T> clazz = (Class<T>) configInstance.getClass();
         Field[] fields = clazz.getFields();
-        
+
+        if(configInstance instanceof PostValidation postValidation) {
+            postValidation.postValidation();
+        }
+
         for (Field field : fields) {
             try {
 
@@ -25,13 +29,13 @@ public class PostValidation {
                     configType.postValidation();
                 }
 
-                if( value instanceof String) {
+                if(value instanceof String) {
                     if (!checkPossibleStringValues(field, value)) {
-                        throw new IllegalArgumentException("Invalid string value for field: " + field.getName() + ", value: " + value);
+                        handleStringException(configInstance, field.getAnnotation(ConfigInfos.PossibleStringValues.class), field, value);
                     }
                 } else if (value instanceof Integer) {
                     if (!checkPossibleIntValues(field, value)) {
-                        throw new IllegalArgumentException("Invalid integer value for field: " + field.getName() + ", value: " + value);
+                        handleIntException(configInstance, field.getAnnotation(ConfigInfos.PossibleIntValues.class), field, value);
                     }
                 }
 
@@ -49,8 +53,9 @@ public class PostValidation {
                     return true;
                 }
             }
+            return false;
         }
-        return false;
+        return true;
     }
 
     public static boolean checkPossibleIntValues(Field field, Object value) {
@@ -61,8 +66,38 @@ public class PostValidation {
                     return true;
                 }
             }
+            return false;
         }
-        return false;
+        return true;
     }
+
+    public static <T> void handleStringException(Object configInstance, ConfigInfos.PossibleStringValues stringValues, Field field, Object value) {
+        ConfigInfos infos = configInstance.getClass().getAnnotation(ConfigInfos.class);
+        switch (infos.errorHandling()) {
+            case THROW_EXCEPTION -> throw new IllegalArgumentException("Invalid string value for field: " + field.getName() + ", value: " + value);
+            case FIRST_VALUE -> {
+                try {
+                    field.set(configInstance, stringValues.values()[0]);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException("Unable to set field: " + field.getName(), e);
+                }
+            }
+        }
+    }
+
+    public static <T> void handleIntException(Object configInstance, ConfigInfos.PossibleIntValues intValues, Field field, Object value) {
+        ConfigInfos infos = configInstance.getClass().getAnnotation(ConfigInfos.class);
+        switch (infos.errorHandling()) {
+            case THROW_EXCEPTION -> throw new IllegalArgumentException("Invalid string value for field: " + field.getName() + ", value: " + value);
+            case FIRST_VALUE -> {
+                try {
+                    field.set(configInstance, intValues.values()[0]);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException("Unable to set field: " + field.getName(), e);
+                }
+            }
+        }
+    }
+
 
 }

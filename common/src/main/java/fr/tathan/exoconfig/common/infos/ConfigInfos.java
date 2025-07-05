@@ -1,5 +1,6 @@
 package fr.tathan.exoconfig.common.infos;
 
+import fr.tathan.exoconfig.common.post_validation.ValidationErrorHandler;
 import fr.tathan.exoconfig.common.utils.Side;
 
 import java.lang.annotation.Retention;
@@ -12,6 +13,7 @@ public @interface ConfigInfos {
 
     Side side() default Side.COMMON;
 
+    ValidationErrorHandler errorHandling() default ValidationErrorHandler.THROW_EXCEPTION;
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface FileDescription {

@@ -12,7 +12,6 @@ public class Config {
 
     public RangedNumber rangedNumber = new RangedNumber(0, 100, 50);
 
-
     @ScreenInfos.Hidden
     public boolean secretEntry = true;
 

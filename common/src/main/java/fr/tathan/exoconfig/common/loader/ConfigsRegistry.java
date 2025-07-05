@@ -2,7 +2,7 @@ package fr.tathan.exoconfig.common.loader;
 
 import fr.tathan.exoconfig.common.utils.ConfigHolder;
 import fr.tathan.exoconfig.common.infos.ConfigInfos;
-import fr.tathan.exoconfig.common.utils.PostValidation;
+import fr.tathan.exoconfig.common.post_validation.PostValidationUtils;
 import fr.tathan.exoconfig.common.utils.Utils;
 
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class ConfigsRegistry {
             configs.put(configInfos.name(), new ConfigHolder<T>(config, configInfos, configInstance));
         }
         T loadedConfig = ConfigLoader.loadOrGenerateDefaults(config);
-        PostValidation.postValidate(loadedConfig);
+        PostValidationUtils.postValidate(loadedConfig);
         return loadedConfig;
     }
 
