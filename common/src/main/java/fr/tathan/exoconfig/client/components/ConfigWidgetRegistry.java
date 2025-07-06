@@ -1,5 +1,6 @@
 package fr.tathan.exoconfig.client.components;
 
+import fr.tathan.exoconfig.client.screen.ConfigScreen;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.network.chat.Component;
 
@@ -44,7 +45,7 @@ public class ConfigWidgetRegistry {
         return this.components.get(entryClass);
     }
 
-    public record WidgetFactory(String fieldName, Object configInstance, Object defaultValue, Field field, Component description) {
+    public record WidgetFactory(String fieldName, Object configInstance, Object defaultValue, Field field, Component description, ConfigScreen<?> configScreen) {
 
     }
 

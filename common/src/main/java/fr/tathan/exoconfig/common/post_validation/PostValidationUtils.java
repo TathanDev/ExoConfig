@@ -48,7 +48,7 @@ public class PostValidationUtils {
     public static boolean checkPossibleStringValues(Field field, Object value) {
         if (field.isAnnotationPresent(ConfigInfos.PossibleStringValues.class)) {
             ConfigInfos.PossibleStringValues possibleValues = field.getAnnotation(ConfigInfos.PossibleStringValues.class);
-            for (String possibleValue : possibleValues.values()) {
+            for (String possibleValue : possibleValues.value()) {
                 if (possibleValue.equals(value)) {
                     return true;
                 }
@@ -61,7 +61,7 @@ public class PostValidationUtils {
     public static boolean checkPossibleIntValues(Field field, Object value) {
         if (field.isAnnotationPresent(ConfigInfos.PossibleIntValues.class)) {
             ConfigInfos.PossibleIntValues possibleValues = field.getAnnotation(ConfigInfos.PossibleIntValues.class);
-            for (Integer possibleValue : possibleValues.values()) {
+            for (Integer possibleValue : possibleValues.value()) {
                 if (possibleValue.equals(value)) {
                     return true;
                 }
@@ -71,13 +71,13 @@ public class PostValidationUtils {
         return true;
     }
 
-    public static <T> void handleStringException(Object configInstance, ConfigInfos.PossibleStringValues stringValues, Field field, Object value) {
+    public static <T> void handleStringException(T configInstance, ConfigInfos.PossibleStringValues stringValues, Field field, Object value) {
         ConfigInfos infos = configInstance.getClass().getAnnotation(ConfigInfos.class);
         switch (infos.errorHandling()) {
             case THROW_EXCEPTION -> throw new IllegalArgumentException("Invalid string value for field: " + field.getName() + ", value: " + value);
             case FIRST_VALUE -> {
                 try {
-                    field.set(configInstance, stringValues.values()[0]);
+                    field.set(configInstance, stringValues.value()[0]);
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException("Unable to set field: " + field.getName(), e);
                 }
@@ -85,13 +85,13 @@ public class PostValidationUtils {
         }
     }
 
-    public static <T> void handleIntException(Object configInstance, ConfigInfos.PossibleIntValues intValues, Field field, Object value) {
+    public static <T> void handleIntException(T configInstance, ConfigInfos.PossibleIntValues intValues, Field field, Object value) {
         ConfigInfos infos = configInstance.getClass().getAnnotation(ConfigInfos.class);
         switch (infos.errorHandling()) {
             case THROW_EXCEPTION -> throw new IllegalArgumentException("Invalid string value for field: " + field.getName() + ", value: " + value);
             case FIRST_VALUE -> {
                 try {
-                    field.set(configInstance, intValues.values()[0]);
+                    field.set(configInstance, intValues.value()[0]);
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException("Unable to set field: " + field.getName(), e);
                 }

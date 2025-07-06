@@ -21,7 +21,7 @@ public class StateButton extends AbstractButton {
     public int inactiveColor = 16777215;
     public Component[] label = new Component[]{
             Component.literal("False"),
-            Component.translatable("True")
+            Component.literal("True")
     };
     public Consumer<Boolean> onPress;
 

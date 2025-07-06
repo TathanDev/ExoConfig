@@ -15,7 +15,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
-import net.minecraft.client.gui.layouts.SpacerElement;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -37,11 +36,14 @@ public class ConfigScreen <T> extends Screen {
     protected ConfigList configList;
     public T configInstance;
 
+    private final ConfigInfos configInfos;
+
 
     public ConfigScreen(Screen parent, T configInstance) {
         super(Component.literal("Config"));
         this.parent = parent;
         this.configInstance = configInstance;
+        this.configInfos = Utils.getConfigInfos(configInstance.getClass());
     }
 
     @SuppressWarnings("unchecked")
@@ -77,7 +79,6 @@ public class ConfigScreen <T> extends Screen {
                 }
 
                 Object value = field.get(object);
-                String name = field.getName();
 
                 if (field.isAnnotationPresent(ScreenInfos.InnerConfig.class)) {
 
@@ -99,7 +100,7 @@ public class ConfigScreen <T> extends Screen {
     public StringWidget getTitleWidget(Field field, boolean title) {
         String name = field.getName();
 
-        MutableComponent titleComponent = Component.translatable("config.stellaris." + name);
+        MutableComponent titleComponent = Component.translatable("config." + this.configInfos.name()  + "." + name);
 
         if(title) titleComponent.withStyle(ChatFormatting.BOLD);
 
@@ -159,12 +160,14 @@ public class ConfigScreen <T> extends Screen {
         if(ConfigWidgetRegistry.getInstance().componentExistForClass(value.getClass())) {
 
             return ConfigWidgetRegistry.getInstance().getComponentForClass(value.getClass())
-                    .apply(new ConfigWidgetRegistry.WidgetFactory(fieldName, configInstance, value, field, description));
+                    .apply(new ConfigWidgetRegistry.WidgetFactory(fieldName, configInstance, value, field, description, this));
 
+        } else if (value instanceof Enum<?>) {
+            return ConfigWidgetRegistry.getInstance().getComponentForClass(Enum.class)
+                    .apply(new ConfigWidgetRegistry.WidgetFactory(fieldName, configInstance, value, field, description, this));
         } else {
-            SpriteIconButton unsupported = stellarisConfigButton(20);
-            unsupported.setTooltip(Tooltip.create(Component.literal("Unsupported field type")));
-            return unsupported;
+            return ConfigWidgetRegistry.getInstance().getComponentForClass(Exception.class)
+                    .apply(new ConfigWidgetRegistry.WidgetFactory(fieldName, configInstance, value, field, description, this));
         }
     }
 
@@ -175,20 +178,18 @@ public class ConfigScreen <T> extends Screen {
         try (Writer writer = Files.newBufferedWriter(configPath)) {
             ExoConfig.getGson().toJson(this.configInstance, this.configInstance.getClass(), writer);
         } catch (Exception e) {
-            e.printStackTrace();
-            playToast(Component.literal("Config Error"), Component.literal("Failed to save Stellaris config"));
+            ExoConfig.LOG.error("Could not save config", e);
+            this.playToast(Component.literal("Config Error"), Component.literal("Failed to save " + this.getConfigName() + " config"));
         }
     }
 
-    private SpriteIconButton stellarisConfigButton(int width) {
-        return SpriteIconButton.builder(Component.literal("Config"), (button) -> {
-            Util.getPlatform().openUri(PlatformHelper.getConfigPath().toUri());
-        }, true).width(width).sprite(TEXTURE, 16, 16).build();
+
+    public void openUri() {
+        Util.getPlatform().openUri(PlatformHelper.getConfigPath().resolve(getConfigName() + ".json").toUri());
     }
 
     public String getConfigName() {
-        ConfigInfos configInfos = Utils.getConfigInfos(configInstance.getClass());
-        if (configInfos != null) {
+        if (this.configInfos != null) {
             return configInfos.name();
         } else {
             return this.configInstance.getClass().getSimpleName();

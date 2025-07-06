@@ -22,12 +22,12 @@ public @interface ConfigInfos {
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface PossibleStringValues {
-         String[] values();
+         String[] value();
     }
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface PossibleIntValues {
-        int[] values();
+        int[] value();
     }
 
 }

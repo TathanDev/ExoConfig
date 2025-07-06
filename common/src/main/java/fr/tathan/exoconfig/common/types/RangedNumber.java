@@ -1,6 +1,7 @@
 package fr.tathan.exoconfig.common.types;
 
 import com.google.gson.*;
+import com.google.gson.internal.LazilyParsedNumber;
 
 import java.lang.reflect.Type;
 
@@ -37,23 +38,25 @@ public class RangedNumber extends Number implements ConfigType<RangedNumber> {
             return (Float) value >= (Float) min && (Float) value <= (Float) max;
         } else if(value instanceof Long) {
             return (Long) value >= (Long) min && (Long) value <= (Long) max;
+        } else if(value instanceof LazilyParsedNumber) {
+            return (Double) value >= (Double) min && (Double) value <= (Double) max;
         }
         throw new IllegalArgumentException("Unsupported number type: " + value.getClass().getName());
     }
 
     @Override
     public void postValidation() {
-        if(!isInRange()) {
-            this.value = min;
-        }
+//        if(!isInRange()) {
+//            this.value = min;
+//        }
     }
 
     @Override
     public JsonElement serialize(RangedNumber src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject obj = new JsonObject();
-        obj.add("min", context.serialize(src.getMin()));
-        obj.add("max", context.serialize(src.getMax()));
-        obj.add("value", context.serialize(src.getValue()));
+        obj.addProperty("min", src.getMin());
+        obj.addProperty("max", src.getMax());
+        obj.addProperty("value", src.getValue());
         return obj;
     }
 
