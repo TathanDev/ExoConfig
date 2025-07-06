@@ -31,7 +31,6 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
     }
 
 
-
     public void addSmall(List<AbstractWidget> options) {
         for(int i = 0; i < options.size(); i += 2) {
             this.addSmall((AbstractWidget)options.get(i), i < options.size() - 1 ? (AbstractWidget)options.get(i + 1) : null);

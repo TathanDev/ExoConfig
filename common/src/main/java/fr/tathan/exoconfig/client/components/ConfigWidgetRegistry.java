@@ -21,7 +21,6 @@ public class ConfigWidgetRegistry {
 
     private ConfigWidgetRegistry() {}
 
-
     public void registerComponent(Class<?> componentClass, Function<WidgetFactory, AbstractWidget> component) {
         if (components.containsKey(componentClass)) {
             throw new IllegalArgumentException("Component already registered for class: " + componentClass.getName());

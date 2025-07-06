@@ -30,9 +30,6 @@ public class EnumButton extends AbstractButton {
         setIndex(defaultValue);
     }
 
-    public EnumButton(int x, int y, int width, int height, Component message, Class<? extends Enum<?>> enumValue, Object defaultValue) {
-        this(x, y, width, height, message, (b) -> {}, enumValue, defaultValue);
-    }
 
     public void nextValue() {
         this.index++;

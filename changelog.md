@@ -7,7 +7,7 @@
 
 - New Config Annotation.
   - Add `@ConfigInfos.PossibleStringValues` and `@ConfigInfos.PossibleIntValues` to allow certains values for config fields.
-  
+
 
 - Add `ConfigTypesRegistry`
   - This allows for registering new types with custom JSON serialization.
@@ -20,3 +20,7 @@
 
 - Add Ranged Number Config Type
   - Allows for defining a range of valid numbers.
+
+- Add new widget
+  - Resourcelocation widget
+  - Enum Widget
