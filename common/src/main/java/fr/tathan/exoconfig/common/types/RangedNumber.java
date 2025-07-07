@@ -38,45 +38,17 @@ public class RangedNumber extends Number implements ConfigType<RangedNumber> {
             return (Float) value >= (Float) min && (Float) value <= (Float) max;
         } else if(value instanceof Long) {
             return (Long) value >= (Long) min && (Long) value <= (Long) max;
-        } else if(value instanceof LazilyParsedNumber) {
-            return (Double) value >= (Double) min && (Double) value <= (Double) max;
+        } else if(value instanceof LazilyParsedNumber number) {
+            return number.doubleValue() >= min.doubleValue() && value.doubleValue() <= max.doubleValue();
         }
         throw new IllegalArgumentException("Unsupported number type: " + value.getClass().getName());
     }
 
     @Override
     public void postValidation() {
-//        if(!isInRange()) {
-//            this.value = min;
-//        }
-    }
-
-    @Override
-    public JsonElement serialize(RangedNumber src, Type typeOfSrc, JsonSerializationContext context) {
-        JsonObject obj = new JsonObject();
-        obj.addProperty("min", src.getMin());
-        obj.addProperty("max", src.getMax());
-        obj.addProperty("value", src.getValue());
-        return obj;
-    }
-
-    @Override
-    public RangedNumber deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
-        JsonObject obj = json.getAsJsonObject();
-
-        if (obj.get("value").getAsJsonPrimitive().isNumber()) {
-            Number min = obj.get("min").getAsNumber();
-            Number max = obj.get("max").getAsNumber();
-            Number value = obj.get("value").getAsNumber();
-
-            if (value instanceof Double || obj.get("value").getAsString().contains(".")) {
-                return new RangedNumber(min.doubleValue(), max.doubleValue(), value.doubleValue());
-            } else {
-                return new RangedNumber(min, max, value);
-            }
+        if(!isInRange()) {
+            this.value = min;
         }
-
-        throw new JsonParseException("Invalid JSON for RangedNumber: " + json);
     }
 
     @Override

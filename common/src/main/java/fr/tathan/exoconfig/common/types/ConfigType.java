@@ -1,5 +1,6 @@
 package fr.tathan.exoconfig.common.types;
 
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
@@ -12,10 +13,10 @@ public interface ConfigType<T extends ConfigType<T>> {
     void postValidation();
 
     default JsonElement serialize(T src, Type typeOfSrc, JsonSerializationContext context) {
-        return ExoConfig.getGson().toJsonTree(src);
+        return new GsonBuilder().setPrettyPrinting().create().toJsonTree(src);
     }
 
     default T deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
-        return ExoConfig.getGson().fromJson(json, typeOfT);
+        return new GsonBuilder().setPrettyPrinting().create().fromJson(json, typeOfT);
     }
 }
