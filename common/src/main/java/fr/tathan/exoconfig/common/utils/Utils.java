@@ -4,7 +4,7 @@ import fr.tathan.exoconfig.common.infos.ConfigInfos;
 
 public class Utils {
 
-    public static  <T> ConfigInfos getConfigInfos(Class<T> configClass) {
+    public static <T> ConfigInfos getConfigInfos(Class<T> configClass) {
 
         if (configClass.isAnnotationPresent(ConfigInfos.class)) {
             ConfigInfos configInfos = configClass.getAnnotation(ConfigInfos.class);

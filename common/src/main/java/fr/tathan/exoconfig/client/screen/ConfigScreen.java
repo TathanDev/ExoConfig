@@ -19,7 +19,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 
 import java.io.Writer;
 import java.lang.reflect.Field;
@@ -30,7 +29,6 @@ import java.nio.file.Path;
 @Environment(EnvType.CLIENT)
 public class ConfigScreen <T> extends Screen {
 
-    public static final ResourceLocation TEXTURE = ResourceLocation.parse("exoconfig:textures/item/engine_fan");
     private final Screen parent;
     public final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
     protected ConfigList configList;
