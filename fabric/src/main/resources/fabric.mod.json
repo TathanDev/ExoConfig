@@ -19,7 +19,9 @@
     ],
     "client": [
       "fr.tathan.exoconfig.fabric.client.ExoconfigFabricClient"
-    ]
+    ],
+    "modmenu": [ "fr.tathan.exoconfig.fabric.client.ModMenuCompat" ]
+
   },
   "mixins": [
     "exoconfig.mixins.json"

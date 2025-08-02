@@ -145,7 +145,7 @@ public class ConfigScreen <T> extends Screen {
     }
 
     public void playToast(Component title, Component description) {
-        this.minecraft.getToasts().addToast(new SystemToast(
+        this.minecraft.getToastManager().addToast(new SystemToast(
                 SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
                 title,
                 description
