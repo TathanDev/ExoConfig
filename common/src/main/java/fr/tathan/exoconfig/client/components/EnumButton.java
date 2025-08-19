@@ -1,22 +1,16 @@
 package fr.tathan.exoconfig.client.components;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.systems.RenderSystem;
-import fr.tathan.exoconfig.ExoConfig;
-import fr.tathan.exoconfig.common.post_validation.ValidationErrorHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
+import net.minecraft.util.ARGB;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class EnumButton extends AbstractButton {
@@ -34,7 +28,6 @@ public class EnumButton extends AbstractButton {
         this.enumValue = enumValue;
         setIndex(defaultValue);
     }
-
 
     public void nextValue() {
         this.index++;
@@ -61,7 +54,7 @@ public class EnumButton extends AbstractButton {
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(this.active, this.isHoveredOrFocused()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
-        this.renderString(guiGraphics, minecraft.font, 16777215 );
+        this.renderString(guiGraphics, minecraft.font, ARGB.white(1));
 
     }
 
