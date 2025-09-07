@@ -5,7 +5,7 @@ import fr.tathan.exoconfig.common.infos.ConfigInfos;
 public class ConfigHolder<T> {
 
     private T config;
-    private ConfigInfos infos;
+    private final ConfigInfos infos;
     private T configInstance;
 
     public ConfigHolder(T config, ConfigInfos infos, T configInstance) {

@@ -26,7 +26,3 @@ type = "required"
 versionRange = "[1.21,)"
 ordering = "NONE"
 side = "BOTH"
-
-
-[[mixins]]
-config = "exoconfig.mixins.json"

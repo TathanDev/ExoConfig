@@ -23,9 +23,6 @@
     "modmenu": [ "fr.tathan.exoconfig.fabric.client.ModMenuCompat" ]
 
   },
-  "mixins": [
-    "exoconfig.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=0.16.14",
     "minecraft": "~1.21.0",

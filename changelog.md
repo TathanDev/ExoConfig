@@ -1,3 +1,4 @@
-# Exo Config 0.2.1
+# Exo Config 0.2.2
 
-Set the minecraft version to 1.21
+## Changes
+- Remove the need for an external networking api
