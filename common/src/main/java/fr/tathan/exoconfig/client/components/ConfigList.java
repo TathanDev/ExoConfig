@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
-    private final ConfigScreen screen;
+    private final ConfigScreen<?> screen;
 
-    public ConfigList(Minecraft minecraft, int width, ConfigScreen screen) {
+    public ConfigList(Minecraft minecraft, int width, ConfigScreen<?> screen) {
         super(minecraft, width, screen.layout.getContentHeight(), screen.layout.getHeaderHeight(), 25);
         this.centerListVertically = false;
         this.screen = screen;

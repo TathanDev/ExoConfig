@@ -20,9 +20,7 @@ public class PlatformHelperImpl {
     public static void registerConfigScreen(String modid, Object config) {
         ModContainer container = ModList.get().getModContainerById(modid).orElseThrow();
 
-        container.registerExtensionPoint(IConfigScreenFactory.class, (cont, screen) -> {
-            return new ConfigScreen<>(screen, config);
-        });
+        container.registerExtensionPoint(IConfigScreenFactory.class, (cont, screen) -> new ConfigScreen<>(screen, config));
 
     }
 
