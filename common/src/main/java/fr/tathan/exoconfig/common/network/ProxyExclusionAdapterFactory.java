@@ -16,7 +16,7 @@ public class ProxyExclusionAdapterFactory implements TypeAdapterFactory {
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
         if (Proxy.class.isAssignableFrom(type.getRawType())) {
-            return (TypeAdapter<T>) new TypeAdapter<Object>() {
+            return (TypeAdapter<T>) new TypeAdapter<>() {
                 @Override
                 public void write(JsonWriter out, Object value) throws IOException {
                     out.nullValue();

@@ -16,13 +16,13 @@ A Simple config lib based on auto screen config
 [[dependencies.exoconfig]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.8,)"
+versionRange = "[21.10,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.exoconfig]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.8,)"
+versionRange = "[1.21.10,)"
 ordering = "NONE"
 side = "BOTH"

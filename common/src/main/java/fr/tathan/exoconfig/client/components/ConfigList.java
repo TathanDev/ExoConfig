@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
-    private final ConfigScreen screen;
+    private final ConfigScreen<?> screen;
 
-    public ConfigList(Minecraft minecraft, int width, ConfigScreen screen) {
+    public ConfigList(Minecraft minecraft, int width, ConfigScreen<?> screen) {
         super(minecraft, width, screen.layout.getContentHeight(), screen.layout.getHeaderHeight(), 25);
         this.centerListVertically = false;
         this.screen = screen;
@@ -32,7 +32,7 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
 
     public void addSmall(List<AbstractWidget> options) {
         for(int i = 0; i < options.size(); i += 2) {
-            this.addSmall((AbstractWidget)options.get(i), i < options.size() - 1 ? (AbstractWidget)options.get(i + 1) : null);
+            this.addSmall(options.get(i), i < options.size() - 1 ? options.get(i + 1) : null);
         }
 
     }
@@ -81,24 +81,24 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
             return rightOption == null ? new Entry(ImmutableList.of(leftOption), screen) : new Entry(ImmutableList.of(leftOption, rightOption), screen);
         }
 
-        public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
-            int i = 0;
-            int j = this.screen.width / 2 - 155;
-
-            for(AbstractWidget abstractWidget : this.children) {
-                abstractWidget.setPosition(j + i, top);
-                abstractWidget.render(guiGraphics, mouseX, mouseY, partialTick);
-                i += 160;
-            }
-
-        }
-
         public List<? extends GuiEventListener> children() {
             return this.children;
         }
 
         public List<? extends NarratableEntry> narratables() {
             return this.children;
+        }
+
+        @Override
+        public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean bl, float partialTick) {
+            int i = 0;
+            int j = this.screen.width / 2 - 155;
+
+            for(AbstractWidget abstractWidget : this.children) {
+                abstractWidget.setPosition(j + i, getContentY());
+                abstractWidget.render(guiGraphics, mouseX, mouseY, partialTick);
+                i += 160;
+            }
         }
     }
 

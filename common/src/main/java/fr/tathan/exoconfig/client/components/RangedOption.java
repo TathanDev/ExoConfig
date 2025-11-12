@@ -1,6 +1,7 @@
 package fr.tathan.exoconfig.client.components;
 
 import net.minecraft.client.gui.components.AbstractSliderButton;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
@@ -58,17 +59,10 @@ public class RangedOption extends AbstractSliderButton {
     }
 
     @Override
-    public void setValueFromMouse(double mouseX) {
-        super.setValueFromMouse(mouseX); // This updates `this.value` (0-1 normalized)
-        this.value = normalizeValue(snapToStep(denormalizeValue(this.value, minValue, maxValue)), minValue, maxValue);
-    }
-
-
-    @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+    public boolean keyPressed(KeyEvent keyEvent) {
         if (this.canChangeValue) {
-            boolean isLeft = keyCode == 263; // GLFW.GLFW_KEY_LEFT
-            boolean isRight = keyCode == 262; // GLFW.GLFW_KEY_RIGHT
+            boolean isLeft = keyEvent.input() == 263; // GLFW.GLFW_KEY_LEFT
+            boolean isRight = keyEvent.input() == 262; // GLFW.GLFW_KEY_RIGHT
 
             if (isLeft || isRight) {
                 double currentValue = getCurrentValue();
@@ -77,7 +71,7 @@ public class RangedOption extends AbstractSliderButton {
                 return true;
             }
         }
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(keyEvent);
     }
 
     // Abstract methods to be implemented by concrete classes using this slider

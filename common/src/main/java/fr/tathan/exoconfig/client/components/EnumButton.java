@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.InputWithModifiers;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -43,7 +44,7 @@ public class EnumButton extends AbstractButton {
     }
 
     @Override
-    public void onPress() {
+    public void onPress(InputWithModifiers inputWithModifiers) {
         this.nextValue();
         onPress.accept(this.index);
     }

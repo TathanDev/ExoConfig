@@ -6,6 +6,7 @@ import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.InputWithModifiers;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -59,7 +60,7 @@ public class StateButton extends AbstractButton {
     }
 
     @Override
-    public void onPress() {
+    public void onPress(InputWithModifiers inputWithModifiers) {
         this.switchState();
         onPress.accept(this.state);
     }

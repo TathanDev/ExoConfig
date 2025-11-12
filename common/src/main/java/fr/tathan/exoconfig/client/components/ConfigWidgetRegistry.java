@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 public class ConfigWidgetRegistry {
 
-    private final Map<Class, Function<WidgetFactory, AbstractWidget>> components = new HashMap<>();
+    private final Map<Class<?>, Function<WidgetFactory, AbstractWidget>> components = new HashMap<>();
 
     private static final ConfigWidgetRegistry INSTANCE = new ConfigWidgetRegistry();
 
