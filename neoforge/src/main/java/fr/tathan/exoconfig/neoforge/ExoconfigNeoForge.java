@@ -2,9 +2,6 @@ package fr.tathan.exoconfig.neoforge;
 
 import fr.tathan.exoconfig.ExoConfig;
 import fr.tathan.exoconfig.client.ExodusClient;
-import fr.tathan.exoconfig.platform.PlatformHelper;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -26,14 +23,12 @@ public final class ExoconfigNeoForge {
         }
     }
 
-    @EventBusSubscriber(modid = ExoConfig.MOD_ID, value= Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
-    public static class ClientModEvents {
+    @EventBusSubscriber(modid = ExoConfig.MOD_ID)
+    public static class ClientEvents {
 
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
+        public static void clientSetup(FMLClientSetupEvent event) {
             ExodusClient.init();
-
         }
-    }
 
+    }
 }

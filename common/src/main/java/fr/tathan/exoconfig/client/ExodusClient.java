@@ -7,7 +7,6 @@ import fr.tathan.exoconfig.client.components.RangedOption;
 import fr.tathan.exoconfig.client.components.StateButton;
 import fr.tathan.exoconfig.common.types.RangedNumber;
 import fr.tathan.exoconfig.platform.PlatformClientHelper;
-import fr.tathan.exoconfig.platform.PlatformHelper;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
