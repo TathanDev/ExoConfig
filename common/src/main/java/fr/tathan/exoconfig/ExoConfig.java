@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.ToNumberPolicy;
 import commonnetwork.api.Dispatcher;
-import fr.tathan.exoconfig.client.ExodusClient;
 import fr.tathan.exoconfig.common.infos.CommentTypeAdapter;
 import fr.tathan.exoconfig.common.loader.ConfigsRegistry;
 import fr.tathan.exoconfig.common.network.NetworkRegistry;
@@ -14,8 +13,6 @@ import fr.tathan.exoconfig.common.types.ConfigTypesRegistry;
 import fr.tathan.exoconfig.common.types.RangedNumber;
 import fr.tathan.exoconfig.common.network.ProxyExclusionAdapterFactory;
 import fr.tathan.exoconfig.common.types.ResourceLocationType;
-import fr.tathan.exoconfig.platform.PlatformHelper;
-import fr.tathan.exoconfig.platform.PlatformHelperClient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
@@ -48,10 +45,6 @@ public final class ExoConfig {
         EXO_CONFIG = ConfigsRegistry.getInstance().registerConfig(new Config(), EXO_CONFIG);
     }
 
-    public static void initClient() {
-        ExodusClient.init();
-        PlatformHelperClient.registerConfigScreen(MOD_ID, EXO_CONFIG);
-    }
 
     public static Gson getGson() {
         return GSON.create();
