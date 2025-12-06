@@ -7,8 +7,6 @@ import fr.tathan.exoconfig.common.infos.ConfigInfos;
 import fr.tathan.exoconfig.common.infos.ScreenInfos;
 import fr.tathan.exoconfig.platform.PlatformHelper;
 import fr.tathan.exoconfig.common.utils.Utils;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
@@ -26,7 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-@Environment(EnvType.CLIENT)
 public class ConfigScreen <T> extends Screen {
 
     private final Screen parent;

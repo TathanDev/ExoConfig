@@ -25,7 +25,6 @@ public class ExodusClient {
 
     public static void init() {
         PlatformClientHelper.registerConfigScreen(ExoConfig.MOD_ID, ExoConfig.EXO_CONFIG);
-
         registerWidgetEntry();
     }
 

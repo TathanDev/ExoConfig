@@ -2,8 +2,6 @@ package fr.tathan.exoconfig.client.components;
 
 import com.google.common.collect.ImmutableList;
 import fr.tathan.exoconfig.client.screen.ConfigScreen;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -58,7 +56,6 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
         return Optional.empty();
     }
 
-    @Environment(EnvType.CLIENT)
     protected static class Entry extends ContainerObjectSelectionList.Entry<Entry> {
         private final List<AbstractWidget> children;
         private final Screen screen;
