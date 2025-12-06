@@ -27,7 +27,7 @@ public class CommentTypeAdapter implements TypeAdapterFactory {
         Class<? super T> raw = type.getRawType();
         final TypeAdapter<T> delegate = gson.getDelegateAdapter(this, type);
 
-        return new TypeAdapter<T>() {
+        return new TypeAdapter<>() {
             @Override
             public void write(JsonWriter out, T value) throws IOException {
                 if (value == null) {

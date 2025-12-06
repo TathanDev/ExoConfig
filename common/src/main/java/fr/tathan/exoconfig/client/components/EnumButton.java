@@ -1,16 +1,13 @@
 package fr.tathan.exoconfig.client.components;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import fr.tathan.exoconfig.common.post_validation.ValidationErrorHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 
 import java.util.function.Consumer;
 
@@ -21,7 +18,7 @@ public class EnumButton extends AbstractButton {
     public Consumer<Integer> onPress;
     public Class<? extends Enum<?>> enumValue;
     public int index = 0;
-    
+
     public EnumButton(int x, int y, int width, int height, Component message, Consumer<Integer> onPress, Class<? extends Enum<?>> enumValue, Object defaultValue) {
         super(x, y, width, height, message);
         this.onPress = onPress;
@@ -87,7 +84,7 @@ public class EnumButton extends AbstractButton {
         }
         return enumConstants[index];
     }
-    
+
     public static String[] getEnumValues(Class<? extends Enum<?>> enumClass) {
         Enum<?>[] enumConstants = enumClass.getEnumConstants();
         String[] values = new String[enumConstants.length];

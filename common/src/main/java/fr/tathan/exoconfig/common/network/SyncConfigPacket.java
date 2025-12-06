@@ -1,7 +1,5 @@
 package fr.tathan.exoconfig.common.network;
 
-import commonnetwork.networking.data.PacketContext;
-import commonnetwork.networking.data.Side;
 import fr.tathan.exoconfig.ExoConfig;
 import fr.tathan.exoconfig.common.loader.ConfigsRegistry;
 import fr.tathan.exoconfig.common.utils.ConfigHolder;
@@ -10,31 +8,20 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 
-public class SyncConfigPacket {
+public record SyncConfigPacket(String configName, String stringConfig) implements CustomPacketPayload {
 
     public static final ResourceLocation CHANNEL = ResourceLocation.fromNamespaceAndPath(ExoConfig.MOD_ID, "sync_config");
-    public static final StreamCodec<FriendlyByteBuf, SyncConfigPacket> STREAM_CODEC = StreamCodec.ofMember(SyncConfigPacket::encode, buf -> new SyncConfigPacket(buf));
+    public static final Type<SyncConfigPacket> TYPE = new Type<>(CHANNEL);
+    public static final StreamCodec<FriendlyByteBuf, SyncConfigPacket> STREAM_CODEC = StreamCodec.ofMember(SyncConfigPacket::encode, SyncConfigPacket::new);
 
-    public final String stringConfig;
-    public final String configName;
 
-    public SyncConfigPacket(String configName, String stringConfig)
-    {
-        this.configName = configName;
-        this.stringConfig = stringConfig;
-
+    @Override
+    public Type<SyncConfigPacket> type() {
+        return TYPE;
     }
 
-    public static CustomPacketPayload.Type<CustomPacketPayload> type()
-    {
-        return new CustomPacketPayload.Type<>(CHANNEL);
-    }
-
-    public SyncConfigPacket(FriendlyByteBuf buf)
-    {
-        this.configName = buf.readUtf();
-        this.stringConfig = buf.readUtf();
-
+    public SyncConfigPacket(FriendlyByteBuf buf) {
+        this(buf.readUtf(), buf.readUtf());
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -42,21 +29,15 @@ public class SyncConfigPacket {
         buf.writeUtf(this.stringConfig);
     }
 
-    public static void handle(PacketContext<SyncConfigPacket> ctx) {
-        if (Side.CLIENT.equals(ctx.side())) {
-            SyncConfigPacket packet = ctx.message();
-            ConfigHolder<?> oldHolder = ConfigsRegistry.getInstance().getConfig(packet.configName);
-            if (oldHolder != null) {
-                // Deserialize the config from the string
-                Object newConfig = ExoConfig.getGson().fromJson(packet.stringConfig, oldHolder.getConfig().getClass());
-                // Update the config instance
-                oldHolder.setConfig(newConfig);
-                // Save the updated config
-                ConfigsRegistry.getInstance().registerConfig(newConfig, oldHolder.getConfigInstance());
-            }
-
-
+    public static void handle(SyncConfigPacket packet) {
+        ConfigHolder<?> oldHolder = ConfigsRegistry.getInstance().getConfig(packet.configName);
+        if (oldHolder != null) {
+            // Deserialize the config from the string
+            Object newConfig = ExoConfig.getGson().fromJson(packet.stringConfig, oldHolder.getConfig().getClass());
+            // Update the config instance
+            oldHolder.setConfig(newConfig);
+            // Save the updated config
+            ConfigsRegistry.getInstance().registerConfig(newConfig, oldHolder.getConfigInstance());
         }
     }
-
 }

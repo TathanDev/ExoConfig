@@ -3,16 +3,15 @@ package fr.tathan.exoconfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.ToNumberPolicy;
-import commonnetwork.api.Dispatcher;
+import fr.tathan.exoconfig.common.Config;
 import fr.tathan.exoconfig.common.infos.CommentTypeAdapter;
 import fr.tathan.exoconfig.common.loader.ConfigsRegistry;
-import fr.tathan.exoconfig.common.network.NetworkRegistry;
+import fr.tathan.exoconfig.common.network.ProxyExclusionAdapterFactory;
 import fr.tathan.exoconfig.common.network.SyncConfigPacket;
-import fr.tathan.exoconfig.common.Config;
 import fr.tathan.exoconfig.common.types.ConfigTypesRegistry;
 import fr.tathan.exoconfig.common.types.RangedNumber;
-import fr.tathan.exoconfig.common.network.ProxyExclusionAdapterFactory;
 import fr.tathan.exoconfig.common.types.ResourceLocationType;
+import fr.tathan.exoconfig.platform.PlatformHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
@@ -32,8 +31,6 @@ public final class ExoConfig {
     public static Config EXO_CONFIG;
 
     public static void init() {
-        NetworkRegistry.init();
-
         ConfigTypesRegistry.register(RangedNumber.class, () -> new RangedNumber(0, 100, 50));
         ConfigTypesRegistry.register(ResourceLocation.class, ResourceLocationType::serialize, ResourceLocationType::deserialize);
 
@@ -54,7 +51,7 @@ public final class ExoConfig {
         if (joined) {
             ConfigsRegistry.getInstance().getConfigs().forEach((key, config) -> {
                 if (config.isSyncable()) {
-                    Dispatcher.sendToClient(new SyncConfigPacket(key, getGson().toJson(config)), player);
+                    PlatformHelper.sendToClient(new SyncConfigPacket(key, getGson().toJson(config)), player);
                 }
             });
         }

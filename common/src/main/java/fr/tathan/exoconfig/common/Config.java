@@ -22,6 +22,8 @@ public class Config {
 
     public Side side = Side.COMMON;
 
+    public boolean debug = false;
+
     @ScreenInfos.Hidden
     public boolean secretEntry = true;
 

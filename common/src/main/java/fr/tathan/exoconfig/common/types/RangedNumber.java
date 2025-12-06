@@ -1,9 +1,6 @@
 package fr.tathan.exoconfig.common.types;
 
-import com.google.gson.*;
 import com.google.gson.internal.LazilyParsedNumber;
-
-import java.lang.reflect.Type;
 
 public class RangedNumber extends Number implements ConfigType<RangedNumber> {
 

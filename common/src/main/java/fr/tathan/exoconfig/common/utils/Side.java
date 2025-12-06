@@ -5,8 +5,8 @@ public enum Side {
     SERVER(true, "server"),
     COMMON(true, "common");
 
-    public boolean sync;
-    public String name;
+    public final boolean sync;
+    public final String name;
 
     Side(Boolean sync, String name) {
         this.sync = sync;

@@ -27,9 +27,9 @@ public class ConfigsRegistry {
             throw new IllegalArgumentException("Config class must be annotated with @ConfigInfos");
         }
         if (configs.containsKey(configInfos.name())) {
-            configs.replace(configInfos.name(), new ConfigHolder<T>(config, configInfos, configInstance));
+            configs.replace(configInfos.name(), new ConfigHolder<>(config, configInfos, configInstance));
         } else {
-            configs.put(configInfos.name(), new ConfigHolder<T>(config, configInfos, configInstance));
+            configs.put(configInfos.name(), new ConfigHolder<>(config, configInfos, configInstance));
         }
         T loadedConfig = ConfigLoader.loadOrGenerateDefaults(config);
         PostValidationUtils.postValidate(loadedConfig);
