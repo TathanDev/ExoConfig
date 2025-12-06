@@ -43,14 +43,6 @@ subprojects {
 
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
-
-        modImplementation "mysticdrew:common-networking-$modLoader:1.0.18-1.21.1"
-
-        if(!isCommon) {
-            // Add the common project as a dependency for all platforms except common and loom.
-            include "mysticdrew:common-networking-$modLoader:1.0.18-1.21.1"
-        }
-
         mappings loom.officialMojangMappings()
     }
 
