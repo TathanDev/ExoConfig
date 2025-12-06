@@ -26,7 +26,7 @@ public final class ExoconfigNeoForge {
         }
     }
 
-    @EventBusSubscriber(modid = ExoConfig.MOD_ID, value= Dist.CLIENT)
+    @EventBusSubscriber(modid = ExoConfig.MOD_ID, value= Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents {
 
         @SubscribeEvent

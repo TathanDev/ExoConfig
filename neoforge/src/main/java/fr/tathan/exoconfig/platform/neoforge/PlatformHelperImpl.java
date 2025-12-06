@@ -2,8 +2,6 @@ package fr.tathan.exoconfig.platform.neoforge;
 
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -15,12 +13,6 @@ public class PlatformHelperImpl {
         return FMLPaths.CONFIGDIR.get();
     }
 
-    public static void registerConfigScreen(String modid, Object config) {
-        ModContainer container = ModList.get().getModContainerById(modid).orElseThrow();
-
-        //container.registerExtensionPoint(IConfigScreenFactory.class, (cont, screen) -> new ConfigScreen<>(screen, config));
-
-    }
 
     public static void sendToClient(CustomPacketPayload payload, ServerPlayer player) {
         PacketDistributor.sendToPlayer(player, payload);
