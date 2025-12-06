@@ -1,7 +1,10 @@
 package fr.tathan.exoconfig.neoforge;
 
 import fr.tathan.exoconfig.ExoConfig;
+import fr.tathan.exoconfig.client.ExodusClient;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 
@@ -20,4 +23,12 @@ public final class ExoconfigNeoForge {
         }
     }
 
+    @EventBusSubscriber(modid = ExoConfig.MOD_ID)
+    public static class ClientEvents {
+
+        public static void clientSetup(FMLClientSetupEvent event) {
+            ExodusClient.init();
+        }
+
+    }
 }

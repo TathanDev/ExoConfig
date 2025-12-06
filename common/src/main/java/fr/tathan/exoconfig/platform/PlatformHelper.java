@@ -14,10 +14,6 @@ public class PlatformHelper {
         throw new AssertionError();
     }
 
-    @ExpectPlatform
-    public static void registerConfigScreen(String modid, Object config) {
-        throw new AssertionError();
-    }
 
     @ExpectPlatform
     public static void sendToClient(CustomPacketPayload payload, ServerPlayer player) {

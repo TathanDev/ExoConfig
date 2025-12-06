@@ -33,7 +33,6 @@ public final class ExoConfig {
     public static Config EXO_CONFIG;
 
     public static void init() {
-        ExodusClient.init();
 
         ConfigTypesRegistry.register(RangedNumber.class, () -> new RangedNumber(0, 100, 50));
         ConfigTypesRegistry.register(ResourceLocation.class, ResourceLocationType::serialize, ResourceLocationType::deserialize);
@@ -44,7 +43,6 @@ public final class ExoConfig {
          * Test Config
          */
         EXO_CONFIG = ConfigsRegistry.getInstance().registerConfig(new Config(), EXO_CONFIG);
-        PlatformHelper.registerConfigScreen(MOD_ID, EXO_CONFIG);
 
     }
 
