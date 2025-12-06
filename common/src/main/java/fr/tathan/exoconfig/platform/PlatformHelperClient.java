@@ -3,12 +3,9 @@ package fr.tathan.exoconfig.platform;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 
-import java.nio.file.Path;
-
-public class PlatformHelper {
-
+public class PlatformHelperClient {
     @ExpectPlatform
-    public static Path getConfigPath() {
+    public static void registerConfigScreen(String modid, Object config) {
         throw new AssertionError();
     }
 }

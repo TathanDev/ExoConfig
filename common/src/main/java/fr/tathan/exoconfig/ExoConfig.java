@@ -15,6 +15,7 @@ import fr.tathan.exoconfig.common.types.RangedNumber;
 import fr.tathan.exoconfig.common.network.ProxyExclusionAdapterFactory;
 import fr.tathan.exoconfig.common.types.ResourceLocationType;
 import fr.tathan.exoconfig.platform.PlatformHelper;
+import fr.tathan.exoconfig.platform.PlatformHelperClient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
@@ -34,7 +35,6 @@ public final class ExoConfig {
     public static Config EXO_CONFIG;
 
     public static void init() {
-        ExodusClient.init();
         NetworkRegistry.init();
 
         ConfigTypesRegistry.register(RangedNumber.class, () -> new RangedNumber(0, 100, 50));
@@ -46,8 +46,11 @@ public final class ExoConfig {
          * Test Config
          */
         EXO_CONFIG = ConfigsRegistry.getInstance().registerConfig(new Config(), EXO_CONFIG);
-        PlatformHelper.registerConfigScreen(MOD_ID, EXO_CONFIG);
+    }
 
+    public static void initClient() {
+        ExodusClient.init();
+        PlatformHelperClient.registerConfigScreen(MOD_ID, EXO_CONFIG);
     }
 
     public static Gson getGson() {

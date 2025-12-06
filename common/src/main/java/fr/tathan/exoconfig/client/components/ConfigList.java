@@ -6,7 +6,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -18,9 +17,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
-    private final ConfigScreen screen;
+    private final ConfigScreen<?> screen;
 
-    public ConfigList(Minecraft minecraft, int width, ConfigScreen screen) {
+    public ConfigList(Minecraft minecraft, int width, ConfigScreen<?> screen) {
         super(minecraft, width, screen.layout.getContentHeight(), screen.layout.getHeaderHeight(), 25);
         this.centerListVertically = false;
         this.screen = screen;

@@ -1,7 +1,9 @@
 package fr.tathan.exoconfig.neoforge;
 
 import fr.tathan.exoconfig.ExoConfig;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 
@@ -20,4 +22,8 @@ public final class ExoconfigNeoForge {
         }
     }
 
+    @SubscribeEvent
+    public static void onClientSetup(RegisterClientReloadListenersEvent event) {
+        ExoConfig.initClient();
+    }
 }
