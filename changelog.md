@@ -1,4 +1,3 @@
-# Exo Config 0.2.3
+# Exo Config 0.2.4
 
-- Fixed dedicated server crash on startup
-- Remove the need for an external networking api
+- Fix packet registry
