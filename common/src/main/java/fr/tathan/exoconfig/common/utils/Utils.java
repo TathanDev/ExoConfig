@@ -7,8 +7,7 @@ public class Utils {
     public static <T> ConfigInfos getConfigInfos(Class<T> configClass) {
 
         if (configClass.isAnnotationPresent(ConfigInfos.class)) {
-            ConfigInfos configInfos = configClass.getAnnotation(ConfigInfos.class);
-            return configInfos;
+            return configClass.getAnnotation(ConfigInfos.class);
         }
         return null;
     }
