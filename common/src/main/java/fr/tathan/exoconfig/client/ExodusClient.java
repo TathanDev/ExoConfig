@@ -1,10 +1,12 @@
 package fr.tathan.exoconfig.client;
 
+import fr.tathan.exoconfig.ExoConfig;
 import fr.tathan.exoconfig.client.components.ConfigWidgetRegistry;
 import fr.tathan.exoconfig.client.components.EnumButton;
 import fr.tathan.exoconfig.client.components.RangedOption;
 import fr.tathan.exoconfig.client.components.StateButton;
 import fr.tathan.exoconfig.common.types.RangedNumber;
+import fr.tathan.exoconfig.platform.PlatformHelper;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
@@ -22,6 +24,8 @@ public class ExodusClient {
     };
 
     public static void init() {
+        PlatformHelper.registerConfigScreen(ExoConfig.MOD_ID, ExoConfig.EXO_CONFIG);
+
         registerWidgetEntry();
     }
 
