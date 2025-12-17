@@ -1,5 +1,5 @@
 plugins {
-    id 'com.github.johnrengelman.shadow'
+    id 'com.gradleup.shadow'
 }
 
 architectury {
@@ -51,7 +51,7 @@ processResources {
     }
 }
 
-shadowJar {
+tasks.shadowJar {
     configurations = [project.configurations.shadowBundle]
     exclude "architectury.common.json"
 
@@ -59,7 +59,7 @@ shadowJar {
 }
 
 remapJar {
-    input.set shadowJar.archiveFile
+    input.set tasks.shadowJar.archiveFile
     atAccessWideners.add("exoconfig.accesswidener")
 
 }
