@@ -26,7 +26,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-@Environment(EnvType.CLIENT)
 public class ConfigScreen <T> extends Screen {
 
     private final Screen parent;

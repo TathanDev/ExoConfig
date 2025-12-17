@@ -58,7 +58,6 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
         return Optional.empty();
     }
 
-    @Environment(EnvType.CLIENT)
     protected static class Entry extends ContainerObjectSelectionList.Entry<Entry> {
         private final List<AbstractWidget> children;
         private final Screen screen;
