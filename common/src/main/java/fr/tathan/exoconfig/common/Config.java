@@ -6,14 +6,8 @@ import fr.tathan.exoconfig.common.types.RangedNumber;
 import fr.tathan.exoconfig.common.utils.Side;
 import net.minecraft.resources.ResourceLocation;
 
-@ConfigInfos(name = "test-config")
+@ConfigInfos(modDisplayName = "ExoConfig Test", name = "test-config")
 public class Config {
-
-    @ConfigInfos.PossibleStringValues({
-            "TestConfig",
-            "MyConfig",
-            "CoolFig"
-    })
     public String name = "TestConfig";
 
     public RangedNumber rangedNumber = new RangedNumber(0, 100, 50);
