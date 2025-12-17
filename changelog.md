@@ -1,3 +1,3 @@
-# Exo Config 0.2.3
+# Exo Config 0.3.0
 
-- Fixed dedicated server crash on startup
+- Add modDisplayName to config info to fix save message

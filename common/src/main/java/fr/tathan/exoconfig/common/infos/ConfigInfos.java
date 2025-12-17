@@ -9,6 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConfigInfos {
 
+    String modDisplayName();
     String name();
 
     Side side() default Side.COMMON;
