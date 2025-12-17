@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.lang.reflect.Field;
 
@@ -35,7 +35,7 @@ public class ScreenUtils {
 
     }
 
-    public static EditBox resourceLocationWidget(ConfigWidgetRegistry.WidgetFactory factory) {
+    public static EditBox IdentifierWidget(ConfigWidgetRegistry.WidgetFactory factory) {
         EditBox editBox = new EditBox(Minecraft.getInstance().font, 150, 20, Component.literal(factory.fieldName()));
 
         if(ScreenUtils.showTooltip(factory.field())) {
@@ -45,7 +45,7 @@ public class ScreenUtils {
 
         editBox.setResponder(str -> {
             try {
-                ResourceLocation location = ResourceLocation.parse(str);
+                Identifier location = Identifier.parse(str);
                 factory.field().set(factory.configInstance(), location);
             } catch (Exception ignored) {}
         });

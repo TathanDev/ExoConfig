@@ -6,11 +6,11 @@ import fr.tathan.exoconfig.common.utils.ConfigHolder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record SyncConfigPacket(String configName, String stringConfig) implements CustomPacketPayload {
 
-    public static final ResourceLocation CHANNEL = ResourceLocation.fromNamespaceAndPath(ExoConfig.MOD_ID, "sync_config");
+    public static final Identifier CHANNEL = Identifier.fromNamespaceAndPath(ExoConfig.MOD_ID, "sync_config");
     public static final Type<SyncConfigPacket> TYPE = new Type<>(CHANNEL);
     public static final StreamCodec<FriendlyByteBuf, SyncConfigPacket> STREAM_CODEC = StreamCodec.ofMember(SyncConfigPacket::encode, SyncConfigPacket::new);
 

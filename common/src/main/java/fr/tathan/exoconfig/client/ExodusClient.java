@@ -10,7 +10,7 @@ import fr.tathan.exoconfig.platform.PlatformClientHelper;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ExodusClient {
 
@@ -73,7 +73,7 @@ public class ExodusClient {
                 }
         );
 
-        ConfigWidgetRegistry.getInstance().registerComponent(ResourceLocation.class, ScreenUtils::resourceLocationWidget);
+        ConfigWidgetRegistry.getInstance().registerComponent(Identifier.class, ScreenUtils::IdentifierWidget);
 
         ConfigWidgetRegistry.getInstance().registerComponent(Exception.class, (factory) -> Button.builder(Component.literal("Open the config to edit"), (b) -> factory.configScreen().openUri()).build());
 

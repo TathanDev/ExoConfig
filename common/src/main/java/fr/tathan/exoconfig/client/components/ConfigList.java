@@ -58,7 +58,6 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
         return Optional.empty();
     }
 
-    @Environment(EnvType.CLIENT)
     protected static class Entry extends ContainerObjectSelectionList.Entry<Entry> {
         private final List<AbstractWidget> children;
         private final Screen screen;
@@ -81,16 +80,17 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
             return rightOption == null ? new Entry(ImmutableList.of(leftOption), screen) : new Entry(ImmutableList.of(leftOption, rightOption), screen);
         }
 
-        public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
+        @Override
+        public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean hovering, float partialTick) {
             int i = 0;
             int j = this.screen.width / 2 - 155;
+            int top = this.getContentY();
 
             for(AbstractWidget abstractWidget : this.children) {
                 abstractWidget.setPosition(j + i, top);
                 abstractWidget.render(guiGraphics, mouseX, mouseY, partialTick);
                 i += 160;
             }
-
         }
 
         public List<? extends GuiEventListener> children() {

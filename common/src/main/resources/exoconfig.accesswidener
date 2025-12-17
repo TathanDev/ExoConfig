@@ -1,4 +1,4 @@
 accessWidener v2 named
 
-extendable method net/minecraft/client/gui/components/AbstractSliderButton setValueFromMouse (D)V
+extendable method net/minecraft/client/gui/components/AbstractSliderButton setValueFromMouse (Lnet/minecraft/client/input/MouseButtonEvent;)V
 accessible field net/minecraft/client/gui/components/AbstractSliderButton canChangeValue Z

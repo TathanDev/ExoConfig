@@ -12,9 +12,9 @@ import fr.tathan.exoconfig.common.network.ProxyExclusionAdapterFactory;
 import fr.tathan.exoconfig.common.network.SyncConfigPacket;
 import fr.tathan.exoconfig.common.types.ConfigTypesRegistry;
 import fr.tathan.exoconfig.common.types.RangedNumber;
-import fr.tathan.exoconfig.common.types.ResourceLocationType;
+import fr.tathan.exoconfig.common.types.IdentifierType;
 import fr.tathan.exoconfig.platform.PlatformHelper;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public final class ExoConfig {
     public static void init() {
 
         ConfigTypesRegistry.register(RangedNumber.class, () -> new RangedNumber(0, 100, 50));
-        ConfigTypesRegistry.register(ResourceLocation.class, ResourceLocationType::serialize, ResourceLocationType::deserialize);
+        ConfigTypesRegistry.register(Identifier.class, IdentifierType::serialize, IdentifierType::deserialize);
 
         ConfigTypesRegistry.registerAdapters(GSON);
 

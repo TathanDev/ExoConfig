@@ -10,7 +10,6 @@ import fr.tathan.exoconfig.common.utils.Utils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.toasts.SystemToast;
@@ -19,6 +18,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.Util;
 
 import java.io.Writer;
 import java.lang.reflect.Field;
@@ -26,7 +26,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-@Environment(EnvType.CLIENT)
 public class ConfigScreen <T> extends Screen {
 
     private final Screen parent;
