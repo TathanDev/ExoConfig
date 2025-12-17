@@ -1,3 +1,4 @@
-# Exo Config 0.2.3
+# Exo Config 0.3.0
 
-- Fixed dedicated server crash on startup
+- Update to 1.21.11
+- Add modDisplayName to config info to fix save message
