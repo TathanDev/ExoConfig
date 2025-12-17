@@ -127,7 +127,7 @@ public class ConfigScreen <T> extends Screen {
     @Override
     public void onClose() {
         saveConfig();
-        this.playToast(Component.literal("Config Saved"), Component.literal("The Stellaris config has been saved"));
+        this.playToast(Component.literal("Config Saved"), Component.literal("The " + this.configInfos.modDisplayName() + " config has been saved"));
         this.minecraft.setScreen(this.parent);
     }
 
