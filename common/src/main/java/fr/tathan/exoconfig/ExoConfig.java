@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.Strictness;
 import com.google.gson.ToNumberPolicy;
-import fr.tathan.exoconfig.client.ExodusClient;
 import fr.tathan.exoconfig.common.Config;
 import fr.tathan.exoconfig.common.infos.CommentTypeAdapter;
 import fr.tathan.exoconfig.common.loader.ConfigsRegistry;
