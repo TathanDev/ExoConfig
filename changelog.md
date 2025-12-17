@@ -1,3 +1,3 @@
-# Exo Config 0.2.4
+# Exo Config 0.3.0
 
-- Fix packet registry
+- Add modDisplayName to config info to fix save message
