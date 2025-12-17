@@ -7,8 +7,6 @@ import fr.tathan.exoconfig.common.infos.ConfigInfos;
 import fr.tathan.exoconfig.common.infos.ScreenInfos;
 import fr.tathan.exoconfig.platform.PlatformHelper;
 import fr.tathan.exoconfig.common.utils.Utils;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;

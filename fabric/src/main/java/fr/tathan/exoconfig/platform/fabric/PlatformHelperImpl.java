@@ -2,7 +2,6 @@ package fr.tathan.exoconfig.platform.fabric;
 
 import com.google.common.collect.Maps;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
-import fr.tathan.exoconfig.ExoConfig;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

@@ -37,7 +37,7 @@ public class ExodusClient {
                     StateButton button = new StateButton(0, 0, 150, 20, Component.literal("StateButton"), (boolean) factory.defaultValue(), (b) -> {
                         try {
                             factory.field().set(factory.configInstance(), b);
-                        } catch (IllegalAccessException e) {}
+                        } catch (IllegalAccessException ignored) {}
                     });
 
                     if(ScreenUtils.showTooltip(factory.field())) button.setTooltip(Tooltip.create(factory.description()));
@@ -50,7 +50,7 @@ public class ExodusClient {
                     EnumButton button = new EnumButton(0, 0, 150, 20, Component.literal("EnumButton"), (index) -> {
                         try {
                             factory.field().set(factory.configInstance(), EnumButton.getEnumValue( (Class<? extends Enum<?>>) factory.defaultValue().getClass(), index));
-                        } catch (IllegalAccessException e) {}
+                        } catch (IllegalAccessException ignored) {}
                     }, (Class<? extends Enum<?>>) factory.defaultValue().getClass(), factory.defaultValue());
 
                     if(ScreenUtils.showTooltip(factory.field())) button.setTooltip(Tooltip.create(factory.description()));
@@ -65,7 +65,7 @@ public class ExodusClient {
                     RangedOption button = new RangedOption(0, 0, 150, 20, Component.literal("StateButton"),  number.getMin().doubleValue(), number.getMax().doubleValue(), number.getValue().doubleValue(), 1,  (b) -> {
                         try {
                             factory.field().set(factory.configInstance(), new RangedNumber(number.getMin(), number.getMax(), b.getCurrentValue()));
-                        } catch (IllegalAccessException e) {}
+                        } catch (IllegalAccessException ignored) {}
                     });
 
                     if(ScreenUtils.showTooltip(factory.field())) button.setTooltip(Tooltip.create(factory.description()));
