@@ -1,7 +1,7 @@
 package fr.tathan.exoconfig.client.components;
 
 import com.google.common.collect.ImmutableList;
-import fr.tathan.exoconfig.client.screen.ConfigScreen;
+import fr.tathan.exoconfig.client.screen.AbstractConfigScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -17,10 +17,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
-    private final ConfigScreen<?> screen;
+    private final AbstractConfigScreen screen;
 
-    public ConfigList(Minecraft minecraft, int width, ConfigScreen<?> screen) {
-        super(minecraft, width, screen.layout.getContentHeight(), screen.layout.getHeaderHeight(), 25);
+    public ConfigList(Minecraft minecraft, int width, AbstractConfigScreen screen) {
+        super(minecraft, width, screen.getLayout().getContentHeight(), screen.getLayout().getHeaderHeight(), 25);
         this.centerListVertically = false;
         this.screen = screen;
     }
@@ -62,7 +62,7 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
     protected static class Entry extends ContainerObjectSelectionList.Entry<Entry> {
         private final List<AbstractWidget> children;
         private final Screen screen;
-        private static final int X_OFFSET = 160;
+        private static final int X_OFFSET = 155;
 
         Entry(List<AbstractWidget> children, Screen screen) {
             this.children = ImmutableList.copyOf(children);

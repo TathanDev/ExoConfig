@@ -8,4 +8,9 @@ public class PlatformHelperClient {
     public static void registerConfigScreen(String modid, Object config) {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static void registerConfigScreens(String modid, Object... configs) {
+        throw new AssertionError();
+    }
 }

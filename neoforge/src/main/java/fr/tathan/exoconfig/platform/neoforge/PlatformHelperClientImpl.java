@@ -1,6 +1,7 @@
 package fr.tathan.exoconfig.platform.neoforge;
 
 import fr.tathan.exoconfig.client.screen.ConfigScreen;
+import fr.tathan.exoconfig.client.screen.MultiplesConfigScreen;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -12,5 +13,12 @@ public class PlatformHelperClientImpl {
         ModContainer container = ModList.get().getModContainerById(modid).orElseThrow();
 
         container.registerExtensionPoint(IConfigScreenFactory.class, (cont, screen) -> new ConfigScreen<>(screen, config));
+    }
+
+    public static void registerConfigScreens(String modid, Object... configs) {
+        ModContainer container = ModList.get().getModContainerById(modid).orElseThrow();
+
+        container.registerExtensionPoint(IConfigScreenFactory.class, (cont, screen) -> new MultiplesConfigScreen(screen, configs));
+
     }
 }

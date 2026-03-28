@@ -1,3 +1,3 @@
-# Exo Config 0.3.0
+# Exo Config 0.4.0
 
-- Add modDisplayName to config info to fix save message
+- Add a MultipleConfigScreen to allow users to select from multiple configs. This is useful for users who have different configurations.
