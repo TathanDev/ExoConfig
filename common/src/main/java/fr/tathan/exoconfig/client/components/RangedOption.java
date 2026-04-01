@@ -52,9 +52,9 @@ public class RangedOption extends AbstractSliderButton {
     }
 
     @Override
-    public void setValueFromMouse(MouseButtonEvent event) {
-        super.setValueFromMouse(event); // This updates `this.value` (0-1 normalized)
-        this.value = normalizeValue(snapToStep(denormalizeValue(this.value, minValue, maxValue)), minValue, maxValue);
+    protected void onDrag(MouseButtonEvent event, double dx, double dy) {
+        super.onDrag(event, dx, dy);
+        this.setValue((event.x() - (double)(this.getX() + 4)) / (double)(this.width - 8));
     }
 
     @Override

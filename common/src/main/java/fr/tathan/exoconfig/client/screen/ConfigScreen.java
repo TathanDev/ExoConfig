@@ -8,7 +8,7 @@ import fr.tathan.exoconfig.common.infos.ScreenInfos;
 import fr.tathan.exoconfig.platform.PlatformHelper;
 import fr.tathan.exoconfig.common.utils.Utils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
@@ -132,8 +132,8 @@ public class ConfigScreen <T> extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int i, int j, float f) {
-        super.render(guiGraphics, i, j, f);
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractRenderState(graphics, mouseX, mouseY, a);
     }
 
     @Override

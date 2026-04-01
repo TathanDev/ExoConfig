@@ -1,28 +1,29 @@
 modLoader = "javafml"
-loaderVersion = "[9,)"
-#issueTrackerURL = ""
+loaderVersion = "[11,)"
+issueTrackerURL = "https://github.com/TathanDev/ExoConfig/issues"
 license = "GNU LGPL 3.0"
 
 [[mods]]
 modId = "exoconfig"
 version = "${version}"
 displayName = "ExoConfig"
-authors = "TATHAN"
+logoFile = "logo.png"
+authors = "TATHAN, St0x0ef"
 description = '''
-A Simple config lib based on auto screen config
+A Simple config lib with auto screen config
 '''
 #logoFile = ""
 
 [[dependencies.exoconfig]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.8,)"
+versionRange = "[26.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.exoconfig]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.8,)"
+versionRange = "[26.1,)"
 ordering = "NONE"
 side = "BOTH"

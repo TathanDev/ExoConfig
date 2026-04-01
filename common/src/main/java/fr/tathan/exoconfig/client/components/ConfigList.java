@@ -3,7 +3,7 @@ package fr.tathan.exoconfig.client.components;
 import com.google.common.collect.ImmutableList;
 import fr.tathan.exoconfig.client.screen.ConfigScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -78,25 +78,25 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
             return rightOption == null ? new Entry(ImmutableList.of(leftOption), screen) : new Entry(ImmutableList.of(leftOption, rightOption), screen);
         }
 
-        @Override
-        public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean hovering, float partialTick) {
-            int i = 0;
-            int j = this.screen.width / 2 - 155;
-            int top = this.getContentY();
-
-            for(AbstractWidget abstractWidget : this.children) {
-                abstractWidget.setPosition(j + i, top);
-                abstractWidget.render(guiGraphics, mouseX, mouseY, partialTick);
-                i += 160;
-            }
-        }
-
         public List<? extends GuiEventListener> children() {
             return this.children;
         }
 
         public List<? extends NarratableEntry> narratables() {
             return this.children;
+        }
+
+        @Override
+        public void extractContent(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean hovered, float partialTick) {
+            int i = 0;
+            int j = this.screen.width / 2 - 155;
+            int top = this.getContentY();
+
+            for(AbstractWidget abstractWidget : this.children) {
+                abstractWidget.setPosition(j + i, top);
+                abstractWidget.extractRenderState(graphics, mouseX, mouseY, partialTick);
+                i += 160;
+            }
         }
     }
 
