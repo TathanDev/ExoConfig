@@ -1,4 +1,3 @@
-# Exo Config 0.3.0
+# Exo Config 0.3.1
 
-- Update to 1.21.11
-- Add modDisplayName to config info to fix save message
+- Update to mc 26.1.2
