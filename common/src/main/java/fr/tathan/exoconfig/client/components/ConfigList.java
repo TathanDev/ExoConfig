@@ -3,7 +3,7 @@ package fr.tathan.exoconfig.client.components;
 import com.google.common.collect.ImmutableList;
 import fr.tathan.exoconfig.client.screen.ConfigScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -79,14 +79,14 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
         }
 
         @Override
-        public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean hovering, float partialTick) {
+        public void extractContent(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, boolean hovering, float partialTick) {
             int i = 0;
             int j = this.screen.width / 2 - 155;
             int top = this.getContentY();
 
             for(AbstractWidget abstractWidget : this.children) {
                 abstractWidget.setPosition(j + i, top);
-                abstractWidget.render(guiGraphics, mouseX, mouseY, partialTick);
+                abstractWidget.extractRenderState(GuiGraphicsExtractor, mouseX, mouseY, partialTick);
                 i += 160;
             }
         }
