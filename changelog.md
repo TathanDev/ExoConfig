@@ -1,4 +1,4 @@
 # Exo Config 0.3.3
 
-## Fixed
-- AW injection on fabric
+## Changes
+- Updated to 26.2
