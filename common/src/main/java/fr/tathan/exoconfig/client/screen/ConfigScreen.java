@@ -8,7 +8,6 @@ import fr.tathan.exoconfig.common.infos.ScreenInfos;
 import fr.tathan.exoconfig.platform.PlatformHelper;
 import fr.tathan.exoconfig.common.utils.Utils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;

@@ -1,3 +1,4 @@
-# Exo Config 0.3.2
+# Exo Config 0.3.3
 
-- Update Arch Loom to 1.17
+## Fixed
+- AW injection on fabric
