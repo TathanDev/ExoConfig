@@ -127,7 +127,7 @@ public class ConfigScreen <T> extends Screen {
     public void onClose() {
         saveConfig();
         this.playToast(Component.literal("Config Saved"), Component.literal("The " + this.configInfos.modDisplayName() + " config has been saved"));
-        this.minecraft.setScreen(this.parent);
+        this.minecraft.gui.setScreen(this.parent);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class ConfigScreen <T> extends Screen {
     }
 
     public void playToast(Component title, Component description) {
-        this.minecraft.getToastManager().addToast(new SystemToast(
+        this.minecraft.gui.toastManager().addToast(new SystemToast(
                 SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
                 title,
                 description
