@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public class EnumButton extends AbstractButton {
-    private static final WidgetSprites SPRITES = new WidgetSprites(Identifier.withDefaultNamespace("widget/button"), Identifier.withDefaultNamespace("widget/button_disabled"), Identifier.withDefaultNamespace("widget/button_highlighted"));
+    public static final WidgetSprites SPRITES = new WidgetSprites(Identifier.withDefaultNamespace("widget/button"), Identifier.withDefaultNamespace("widget/button_disabled"), Identifier.withDefaultNamespace("widget/button_highlighted"));
 
     public String[] label;
     public Consumer<Integer> onPress;

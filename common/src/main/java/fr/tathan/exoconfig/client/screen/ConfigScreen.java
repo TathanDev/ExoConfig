@@ -23,7 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-public class ConfigScreen <T> extends Screen {
+public class ConfigScreen <T> extends AbstractConfigScreen {
 
     private final Screen parent;
     public final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
@@ -183,5 +183,10 @@ public class ConfigScreen <T> extends Screen {
         } else {
             return this.configInstance.getClass().getSimpleName();
         }
+    }
+
+    @Override
+    public HeaderAndFooterLayout getLayout() {
+        return this.layout;
     }
 }
