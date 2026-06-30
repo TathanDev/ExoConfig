@@ -2,7 +2,6 @@ package fr.tathan.exoconfig.client.components;
 
 import com.google.common.collect.ImmutableList;
 import fr.tathan.exoconfig.client.screen.AbstractConfigScreen;
-import fr.tathan.exoconfig.client.screen.ConfigScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;

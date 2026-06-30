@@ -1,4 +1,4 @@
-# Exo Config 0.3.3
+# Exo Config 0.3.5
 
-## Fixed
-- AW injection on fabric
+## Changes
+- Automatic config screen registry for modmemu on Fabric
