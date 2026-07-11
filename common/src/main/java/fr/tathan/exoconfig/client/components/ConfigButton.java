@@ -37,7 +37,7 @@ public class ConfigButton<T> extends AbstractButton {
 
     @Override
     public void onPress(InputWithModifiers input) {
-        Minecraft.getInstance().setScreen(new ConfigScreen<>(screen, configInstance));
+        Minecraft.getInstance().gui.setScreen(new ConfigScreen<>(screen, configInstance));
 
     }
 
