@@ -1,7 +1,7 @@
 package fr.tathan.exoconfig.client.components;
 
 import com.google.common.collect.ImmutableList;
-import fr.tathan.exoconfig.client.screen.ConfigScreen;
+import fr.tathan.exoconfig.client.screen.AbstractConfigScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class ConfigList extends ContainerObjectSelectionList<ConfigList.Entry> {
-    private final ConfigScreen<?> screen;
+    private final AbstractConfigScreen screen;
 
-    public ConfigList(Minecraft minecraft, int width, ConfigScreen<?> screen) {
-        super(minecraft, width, screen.layout.getContentHeight(), screen.layout.getHeaderHeight(), 25);
+    public ConfigList(Minecraft minecraft, int width, AbstractConfigScreen screen) {
+        super(minecraft, width, screen.getLayout().getContentHeight(), screen.getLayout().getHeaderHeight(), 25);
         this.centerListVertically = false;
         this.screen = screen;
     }

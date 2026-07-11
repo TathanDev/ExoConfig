@@ -22,7 +22,6 @@
       "fr.tathan.exoconfig.fabric.client.ExoconfigFabricClient"
     ],
     "modmenu": [ "fr.tathan.exoconfig.fabric.client.ModMenuCompat" ]
-
   },
   "depends": {
     "fabricloader": ">=0.18.5",

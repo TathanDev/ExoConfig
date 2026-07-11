@@ -1,4 +1,7 @@
-# Exo Config 0.3.3
+# Exo Config 0.3.5
+
+## Added
+- New multiple config screens for better organization and management of settings.
 
 ## Changes
-- Updated to 26.2
+- Automatic config screen registry for modmemu on Fabric
