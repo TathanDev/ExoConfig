@@ -78,7 +78,5 @@ public class ExodusClient {
         ConfigWidgetRegistry.getInstance().registerComponent(Exception.class, (factory) -> Button.builder(Component.literal("Open the config to edit"), (b) -> factory.configScreen().openUri()).build());
 
         for(Class<?> clazz : editBoxClass) ConfigWidgetRegistry.getInstance().registerComponent(clazz, ScreenUtils::numberAndStringWidget);
-
     }
-
 }

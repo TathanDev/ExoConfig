@@ -1,5 +1,6 @@
 package fr.tathan.exoconfig.client.screen;
 
+import com.mojang.blaze3d.Blaze3D;
 import fr.tathan.exoconfig.ExoConfig;
 import fr.tathan.exoconfig.client.components.ConfigList;
 import fr.tathan.exoconfig.client.components.ConfigWidgetRegistry;
@@ -15,7 +16,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.util.Util;
 
 import java.io.Writer;
 import java.lang.reflect.Field;
@@ -174,7 +174,7 @@ public class ConfigScreen <T> extends AbstractConfigScreen {
 
 
     public void openUri() {
-        Util.getPlatform().openUri(PlatformHelper.getConfigPath().resolve(getConfigName() + ".json").toUri());
+        Blaze3D.openUri(PlatformHelper.getConfigPath().resolve(getConfigName() + ".json").toUri());
     }
 
     public String getConfigName() {
