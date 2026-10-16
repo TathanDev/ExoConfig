@@ -3,6 +3,7 @@ package fr.tathan.exoconfig.common.network;
 import fr.tathan.exoconfig.ExoConfig;
 import fr.tathan.exoconfig.common.loader.ConfigsRegistry;
 import fr.tathan.exoconfig.common.utils.ConfigHolder;
+import fr.tathan.exoconfig.common.utils.Utils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -30,14 +31,19 @@ public record SyncConfigPacket(String configName, String stringConfig) implement
     }
 
     public static void handle(SyncConfigPacket packet) {
-        ConfigHolder<?> oldHolder = ConfigsRegistry.getInstance().getConfig(packet.configName);
-        if (oldHolder != null) {
+        ConfigHolder<?> holder = ConfigsRegistry.getInstance().getConfig(packet.configName);
+        if (holder == null) return;
+
+        Object liveConfig = holder.getConfig();
+        try {
             // Deserialize the config from the string
-            Object newConfig = ExoConfig.getGson().fromJson(packet.stringConfig, oldHolder.getConfig().getClass());
-            // Update the config instance
-            oldHolder.setConfig(newConfig);
-            // Save the updated config
-            ConfigsRegistry.getInstance().registerConfig(newConfig, oldHolder.getConfigInstance());
+            Object serverConfig = ExoConfig.getGson().fromJson(packet.stringConfig, liveConfig.getClass());
+            if (serverConfig == null) {
+                return;
+            }
+            Utils.copyFields(serverConfig, liveConfig);
+        } catch (Exception e) {
+            ExoConfig.LOG.error("Could not apply synced config {}", packet.configName, e);
         }
     }
 }

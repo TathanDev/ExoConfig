@@ -2,3 +2,4 @@
 
 ## Fixes
 - Config now sync the config itself
+- Clients now apply the synced values instead of reloading their local config file
