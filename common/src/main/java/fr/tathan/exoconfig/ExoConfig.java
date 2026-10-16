@@ -51,9 +51,9 @@ public final class ExoConfig {
 
     public static void syncConfigs(ServerPlayer player, boolean joined) {
         if (joined) {
-            ConfigsRegistry.getInstance().getConfigs().forEach((key, config) -> {
-                if (config.isSyncable()) {
-                    PlatformHelper.sendToClient(new SyncConfigPacket(key, getGson().toJson(config)), player);
+            ConfigsRegistry.getInstance().getConfigs().forEach((key, holder) -> {
+                if (holder.isSyncable()) {
+                    PlatformHelper.sendToClient(new SyncConfigPacket(key, getGson().toJson(holder.getConfig())), player);
                 }
             });
         }
