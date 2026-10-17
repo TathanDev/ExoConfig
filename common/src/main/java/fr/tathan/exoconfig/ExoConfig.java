@@ -1,5 +1,6 @@
 package fr.tathan.exoconfig;
 
+import com.google.gson.FormattingStyle;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.Strictness;
@@ -51,9 +52,16 @@ public final class ExoConfig {
 
     public static void syncConfigs(ServerPlayer player, boolean joined) {
         if (joined) {
+            Gson networkGson = getGson().newBuilder().setFormattingStyle(FormattingStyle.COMPACT).create();
+
             ConfigsRegistry.getInstance().getConfigs().forEach((key, holder) -> {
                 if (holder.isSyncable()) {
-                    PlatformHelper.sendToClient(new SyncConfigPacket(key, getGson().toJson(holder.getConfig())), player);
+                    String json = networkGson.toJson(holder.getConfig());
+                    if (json.length() > SyncConfigPacket.MAX_CONFIG_LENGTH) {
+                        LOG.error("Config {} is too large to sync ({} characters, max {})", key, json.length(), SyncConfigPacket.MAX_CONFIG_LENGTH);
+                        return;
+                    }
+                    PlatformHelper.sendToClient(new SyncConfigPacket(key, json), player);
                 }
             });
         }

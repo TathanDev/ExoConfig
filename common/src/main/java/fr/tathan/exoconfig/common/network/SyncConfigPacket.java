@@ -14,6 +14,8 @@ public record SyncConfigPacket(String configName, String stringConfig) implement
     public static final Identifier CHANNEL = Identifier.fromNamespaceAndPath(ExoConfig.MOD_ID, "sync_config");
     public static final Type<SyncConfigPacket> TYPE = new Type<>(CHANNEL);
     public static final StreamCodec<FriendlyByteBuf, SyncConfigPacket> STREAM_CODEC = StreamCodec.ofMember(SyncConfigPacket::encode, SyncConfigPacket::new);
+    // In characters. This stays under the 1 MiB payload limit (according to claude)
+    public static final int MAX_CONFIG_LENGTH = 262_144;
 
 
     @Override
@@ -22,12 +24,12 @@ public record SyncConfigPacket(String configName, String stringConfig) implement
     }
 
     public SyncConfigPacket(FriendlyByteBuf buf) {
-        this(buf.readUtf(), buf.readUtf());
+        this(buf.readUtf(), buf.readUtf(MAX_CONFIG_LENGTH));
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeUtf(this.configName);
-        buf.writeUtf(this.stringConfig);
+        buf.writeUtf(this.stringConfig, MAX_CONFIG_LENGTH);
     }
 
     public static void handle(SyncConfigPacket packet) {
