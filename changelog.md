@@ -1,7 +1,6 @@
-# Exo Config 0.3.5
+# Exo Config 0.3.6
 
-## Added
-- New multiple config screens for better organization and management of settings.
-
-## Changes
-- Automatic config screen registry for modmemu on Fabric
+## Fixes
+- Config now sync the config itself
+- Clients now apply the synced values instead of reloading their local config file
+- Large configs no longer disconnect players when synced
