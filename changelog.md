@@ -1,4 +1,4 @@
-# Exo Config 0.3.5
+# Exo Config 0.3.6
 
 ## Fixes
 - Config now sync the config itself
